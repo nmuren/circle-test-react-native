@@ -1738,6 +1738,9 @@ workflows:
                 - main
                 - main-duplicate
                 - main-duplicate-2
+                - main-fb
+                - main-fb-duplicate
+                - main-fb-duplicate-2
     jobs:
       - nightly_job
 
