@@ -32,9 +32,7 @@ function getValue<T>(values: Array<T>, index: number): T {
 }
 
 class StatusBarHiddenExample extends React.Component<{...}, $FlowFixMeState> {
-  state:
-    | $FlowFixMe
-    | {animated: boolean, hidden: boolean, showHideTransition: string} = {
+  state = {
     animated: true,
     hidden: false,
     showHideTransition: getValue(showHideTransitions, 0),
@@ -60,12 +58,11 @@ class StatusBarHiddenExample extends React.Component<{...}, $FlowFixMeState> {
     });
   };
 
-  render(): React.Node {
+  render() {
     return (
       <View>
         <StatusBar
           hidden={this.state.hidden}
-          // $FlowFixMe[incompatible-type]
           showHideTransition={this.state.showHideTransition}
           animated={this.state.animated}
         />
@@ -113,17 +110,16 @@ class StatusBarStyleExample extends React.Component<{...}, $FlowFixMeState> {
     this.setState({animated: !this.state.animated});
   };
 
-  state: $FlowFixMe | {animated: boolean, barStyle: string} = {
+  state = {
     animated: true,
     barStyle: getValue(barStyles, this._barStyleIndex),
   };
 
-  render(): React.Node {
+  render() {
     return (
       <View>
         <StatusBar
           animated={this.state.animated}
-          // $FlowFixMe[incompatible-type]
           barStyle={this.state.barStyle}
         />
         <TouchableHighlight
@@ -154,7 +150,7 @@ class StatusBarNetworkActivityExample extends React.Component<
   {...},
   $FlowFixMeState,
 > {
-  state: $FlowFixMe | {networkActivityIndicatorVisible: boolean} = {
+  state = {
     networkActivityIndicatorVisible: false,
   };
 
@@ -165,7 +161,7 @@ class StatusBarNetworkActivityExample extends React.Component<
     });
   };
 
-  render(): React.Node {
+  render() {
     return (
       <View>
         <StatusBar
@@ -192,7 +188,7 @@ class StatusBarBackgroundColorExample extends React.Component<
   {...},
   $FlowFixMeState,
 > {
-  state: $FlowFixMe | {animated: boolean, backgroundColor: string} = {
+  state = {
     animated: true,
     backgroundColor: getValue(colors, 0),
   };
@@ -208,7 +204,7 @@ class StatusBarBackgroundColorExample extends React.Component<
     this.setState({animated: !this.state.animated});
   };
 
-  render(): React.Node {
+  render() {
     return (
       <View>
         <StatusBar
@@ -238,7 +234,7 @@ class StatusBarTranslucentExample extends React.Component<
   {...},
   $FlowFixMeState,
 > {
-  state: $FlowFixMe | {translucent: boolean} = {
+  state = {
     translucent: false,
   };
 
@@ -248,7 +244,7 @@ class StatusBarTranslucentExample extends React.Component<
     });
   };
 
-  render(): React.Node {
+  render() {
     return (
       <View>
         <StatusBar translucent={this.state.translucent} />
@@ -267,7 +263,7 @@ class StatusBarTranslucentExample extends React.Component<
 }
 
 class StatusBarStaticIOSExample extends React.Component<{...}> {
-  render(): React.Node {
+  render() {
     return (
       <View>
         <TouchableHighlight
@@ -333,7 +329,7 @@ class StatusBarStaticIOSExample extends React.Component<{...}> {
 }
 
 class StatusBarStaticAndroidExample extends React.Component<{...}> {
-  render(): React.Node {
+  render() {
     return (
       <View>
         <TouchableHighlight
@@ -433,7 +429,7 @@ class StatusBarStaticAndroidExample extends React.Component<{...}> {
 }
 
 class ModalExample extends React.Component<{...}, $FlowFixMeState> {
-  state: $FlowFixMe | {modalVisible: boolean} = {
+  state = {
     modalVisible: false,
   };
 
@@ -441,7 +437,7 @@ class ModalExample extends React.Component<{...}, $FlowFixMeState> {
     this.setState({modalVisible: !this.state.modalVisible});
   };
 
-  render(): React.Node {
+  render() {
     return (
       <View>
         <TouchableHighlight

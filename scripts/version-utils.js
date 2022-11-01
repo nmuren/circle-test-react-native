@@ -7,6 +7,8 @@
  * @format
  */
 
+const {exec} = require('shelljs');
+
 const VERSION_REGEX = /^v?((\d+)\.(\d+)\.(\d+)(?:-(.+))?)$/;
 
 function parseVersion(versionStr) {
@@ -30,7 +32,23 @@ function isReleaseBranch(branch) {
   return branch.endsWith('-stable');
 }
 
+function getBranchName() {
+  return exec('git rev-parse --abbrev-ref HEAD', {
+    silent: true,
+  }).stdout.trim();
+}
+
+function isTaggedLatest(commitSha) {
+  return (
+    exec(`git rev-list -1 latest | grep ${commitSha}`, {
+      silent: true,
+    }).stdout.trim() === commitSha
+  );
+}
+
 module.exports = {
+  getBranchName,
+  isTaggedLatest,
   parseVersion,
   isReleaseBranch,
 };

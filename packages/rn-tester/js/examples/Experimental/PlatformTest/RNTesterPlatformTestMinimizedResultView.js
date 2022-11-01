@@ -10,8 +10,6 @@
 
 import type {ViewStyleProp} from 'react-native/Libraries/StyleSheet/StyleSheet';
 
-import RNTesterPlatformTestResultsText from './RNTesterPlatformTestResultsText';
-
 import * as React from 'react';
 import {View, Text, StyleSheet, TouchableHighlight} from 'react-native';
 
@@ -20,7 +18,6 @@ type Props = $ReadOnly<{|
   numError: number,
   numPass: number,
   numPending: number,
-  numSkipped: number,
   onPress?: () => void,
   style?: ?ViewStyleProp,
 |}>;
@@ -29,22 +26,26 @@ export default function RNTesterPlatformTestMinimizedResultView({
   numError,
   numPass,
   numPending,
-  numSkipped,
   onPress,
   style,
 }: Props): React.MixedElement {
   return (
     <TouchableHighlight onPress={onPress} style={[styles.root, style]}>
       <View style={styles.innerContainer}>
-        <Text style={styles.statsContainer}>
-          <RNTesterPlatformTestResultsText
-            numError={numError}
-            numFail={numFail}
-            numPass={numPass}
-            numPending={numPending}
-            numSkipped={numSkipped}
-          />
-        </Text>
+        <View style={styles.statsContainer}>
+          <Text style={styles.summaryText}>
+            {numPass} <Text style={styles.passText}>Pass</Text>
+          </Text>
+          <Text style={styles.summaryText}>
+            {numFail} <Text style={styles.failText}>Fail</Text>
+          </Text>
+          <Text style={styles.summaryText}>
+            {numError} <Text style={styles.errorText}>Error</Text>
+          </Text>
+          <Text style={styles.summaryText}>
+            {numPending} <Text style={styles.pendingText}>Pending</Text>
+          </Text>
+        </View>
         <Text style={styles.caret}>⌃</Text>
       </View>
     </TouchableHighlight>
@@ -58,6 +59,12 @@ const styles = StyleSheet.create({
     marginEnd: 8,
     opacity: 0.5,
   },
+  errorText: {
+    color: 'orange',
+  },
+  failText: {
+    color: 'red',
+  },
   innerContainer: {
     width: '100%',
     height: '100%',
@@ -66,6 +73,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 8,
     backgroundColor: 'white',
+  },
+  passText: {
+    color: 'green',
+  },
+  pendingText: {
+    color: 'gray',
   },
   root: {
     borderTopColor: 'rgb(171, 171, 171)',
@@ -76,6 +89,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
+  },
+  summaryText: {
     marginStart: 8,
   },
 });

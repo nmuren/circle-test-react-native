@@ -33,12 +33,10 @@ exports[`VirtualizedSectionList handles nested lists 1`] = `
 >
   <View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     />
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     >
@@ -74,12 +72,10 @@ exports[`VirtualizedSectionList handles nested lists 1`] = `
         stickyHeaderIndices={Array []}
       >
         <View
-          onFocusCapture={[Function]}
           onLayout={[Function]}
           style={null}
         />
         <View
-          onFocusCapture={[Function]}
           onLayout={[Function]}
           style={null}
         >
@@ -88,7 +84,6 @@ exports[`VirtualizedSectionList handles nested lists 1`] = `
           />
         </View>
         <View
-          onFocusCapture={[Function]}
           onLayout={[Function]}
           style={null}
         >
@@ -97,14 +92,12 @@ exports[`VirtualizedSectionList handles nested lists 1`] = `
           />
         </View>
         <View
-          onFocusCapture={[Function]}
           onLayout={[Function]}
           style={null}
         />
       </View>
     </View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     >
@@ -141,7 +134,6 @@ exports[`VirtualizedSectionList handles nested lists 1`] = `
       >
         <View>
           <View
-            onFocusCapture={[Function]}
             onLayout={[Function]}
             style={
               Array [
@@ -153,7 +145,6 @@ exports[`VirtualizedSectionList handles nested lists 1`] = `
             }
           />
           <View
-            onFocusCapture={[Function]}
             onLayout={[Function]}
             style={
               Array [
@@ -169,7 +160,6 @@ exports[`VirtualizedSectionList handles nested lists 1`] = `
             />
           </View>
           <View
-            onFocusCapture={[Function]}
             onLayout={[Function]}
             style={
               Array [
@@ -185,7 +175,6 @@ exports[`VirtualizedSectionList handles nested lists 1`] = `
             />
           </View>
           <View
-            onFocusCapture={[Function]}
             onLayout={[Function]}
             style={
               Array [
@@ -200,7 +189,6 @@ exports[`VirtualizedSectionList handles nested lists 1`] = `
       </RCTScrollView>
     </View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     />
@@ -244,12 +232,10 @@ exports[`VirtualizedSectionList handles separators correctly 1`] = `
 >
   <View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     />
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     >
@@ -289,7 +275,6 @@ exports[`VirtualizedSectionList handles separators correctly 1`] = `
       </View>
     </View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     >
@@ -329,7 +314,6 @@ exports[`VirtualizedSectionList handles separators correctly 1`] = `
       </View>
     </View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     >
@@ -338,7 +322,6 @@ exports[`VirtualizedSectionList handles separators correctly 1`] = `
       />
     </View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     />
@@ -382,12 +365,10 @@ exports[`VirtualizedSectionList handles separators correctly 2`] = `
 >
   <View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     />
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     >
@@ -427,7 +408,6 @@ exports[`VirtualizedSectionList handles separators correctly 2`] = `
       </View>
     </View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     >
@@ -467,7 +447,6 @@ exports[`VirtualizedSectionList handles separators correctly 2`] = `
       </View>
     </View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     >
@@ -476,7 +455,6 @@ exports[`VirtualizedSectionList handles separators correctly 2`] = `
       />
     </View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     />
@@ -520,12 +498,10 @@ exports[`VirtualizedSectionList handles separators correctly 3`] = `
 >
   <View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     />
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     >
@@ -565,7 +541,6 @@ exports[`VirtualizedSectionList handles separators correctly 3`] = `
       </View>
     </View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     >
@@ -606,7 +581,6 @@ exports[`VirtualizedSectionList handles separators correctly 3`] = `
       </View>
     </View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     >
@@ -615,7 +589,6 @@ exports[`VirtualizedSectionList handles separators correctly 3`] = `
       />
     </View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     />
@@ -659,12 +632,10 @@ exports[`VirtualizedSectionList handles separators correctly 4`] = `
 >
   <View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     />
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     >
@@ -704,7 +675,6 @@ exports[`VirtualizedSectionList handles separators correctly 4`] = `
       </View>
     </View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     >
@@ -745,7 +715,6 @@ exports[`VirtualizedSectionList handles separators correctly 4`] = `
       </View>
     </View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     >
@@ -754,7 +723,6 @@ exports[`VirtualizedSectionList handles separators correctly 4`] = `
       />
     </View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     />
@@ -845,7 +813,6 @@ exports[`VirtualizedSectionList renders all the bells and whistles 1`] = `
       <header />
     </View>
     <View
-      onFocusCapture={[Function]}
       style={
         Array [
           Object {
@@ -862,7 +829,6 @@ exports[`VirtualizedSectionList renders all the bells and whistles 1`] = `
       }
     />
     <View
-      onFocusCapture={[Function]}
       style={
         Array [
           Object {
@@ -886,7 +852,6 @@ exports[`VirtualizedSectionList renders all the bells and whistles 1`] = `
       </View>
     </View>
     <View
-      onFocusCapture={[Function]}
       style={
         Array [
           Object {
@@ -910,7 +875,6 @@ exports[`VirtualizedSectionList renders all the bells and whistles 1`] = `
       </View>
     </View>
     <View
-      onFocusCapture={[Function]}
       style={
         Array [
           Object {
@@ -934,7 +898,6 @@ exports[`VirtualizedSectionList renders all the bells and whistles 1`] = `
       </View>
     </View>
     <View
-      onFocusCapture={[Function]}
       style={
         Array [
           Object {
@@ -958,7 +921,6 @@ exports[`VirtualizedSectionList renders all the bells and whistles 1`] = `
       </View>
     </View>
     <View
-      onFocusCapture={[Function]}
       style={
         Array [
           Object {
@@ -979,7 +941,6 @@ exports[`VirtualizedSectionList renders all the bells and whistles 1`] = `
       />
     </View>
     <View
-      onFocusCapture={[Function]}
       style={
         Array [
           Object {
@@ -1101,12 +1062,10 @@ exports[`VirtualizedSectionList renders list with empty component 1`] = `
 >
   <View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     />
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     >
@@ -1115,7 +1074,6 @@ exports[`VirtualizedSectionList renders list with empty component 1`] = `
       />
     </View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     />
@@ -1159,12 +1117,10 @@ exports[`VirtualizedSectionList renders simple list 1`] = `
 >
   <View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     />
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     >
@@ -1173,7 +1129,6 @@ exports[`VirtualizedSectionList renders simple list 1`] = `
       />
     </View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     >
@@ -1182,7 +1137,6 @@ exports[`VirtualizedSectionList renders simple list 1`] = `
       />
     </View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     >
@@ -1191,7 +1145,6 @@ exports[`VirtualizedSectionList renders simple list 1`] = `
       />
     </View>
     <View
-      onFocusCapture={[Function]}
       onLayout={[Function]}
       style={null}
     />

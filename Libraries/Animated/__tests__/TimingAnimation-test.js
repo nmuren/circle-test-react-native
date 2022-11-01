@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @format
- * @oncall react_native
+ * @emails oncall+react_native
  */
 
 'use strict';
 
-import TimingAnimation from '../animations/TimingAnimation';
+const TimingAnimation = require('../animations/TimingAnimation');
 
 describe('Timing Animation', () => {
   it('should return array of 61 items', () => {

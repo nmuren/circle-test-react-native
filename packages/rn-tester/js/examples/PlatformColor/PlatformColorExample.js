@@ -214,7 +214,6 @@ function FallbackColorsExample() {
           style={{
             ...styles.colorCell,
             backgroundColor: color.color,
-            borderColor: color.color,
           }}
         />
       </View>

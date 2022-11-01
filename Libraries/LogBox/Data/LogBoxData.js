@@ -10,20 +10,19 @@
 
 ('use strict');
 
-import type {ExtendedError} from '../../Core/ExtendedError';
+import * as React from 'react';
+import LogBoxLog from './LogBoxLog';
+import {parseLogBoxException} from './parseLogBoxLog';
 import type {LogLevel} from './LogBoxLog';
 import type {
+  Message,
   Category,
   ComponentStack,
   ExtendedExceptionData,
-  Message,
 } from './parseLogBoxLog';
-
 import parseErrorStack from '../../Core/Devtools/parseErrorStack';
+import type {ExtendedError} from '../../Core/ExtendedError';
 import NativeLogBox from '../../NativeModules/specs/NativeLogBox';
-import LogBoxLog from './LogBoxLog';
-import {parseLogBoxException} from './parseLogBoxLog';
-import * as React from 'react';
 export type LogBoxLogs = Set<LogBoxLog>;
 export type LogData = $ReadOnly<{|
   level: LogLevel,
@@ -402,7 +401,7 @@ export function withSubscription(
   WrappedComponent: SubscribedComponent,
 ): React.AbstractComponent<{||}> {
   class LogBoxStateSubscription extends React.Component<Props, State> {
-    static getDerivedStateFromError(): {hasError: boolean} {
+    static getDerivedStateFromError() {
       return {hasError: true};
     }
 
@@ -414,7 +413,7 @@ export function withSubscription(
 
     _subscription: ?Subscription;
 
-    state: State = {
+    state = {
       logs: new Set(),
       isDisabled: false,
       hasError: false,

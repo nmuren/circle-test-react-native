@@ -25,19 +25,13 @@ class TaskUtilsTest {
   }
 
   @Test
-  fun windowsAwareCommandLine_withList_isEqualAsVararg() {
-    assertEquals(
-        windowsAwareCommandLine(listOf("a", "b", "c")), windowsAwareCommandLine("a", "b", "c"))
-  }
-
-  @Test
   @WithOs(OS.MAC)
   fun windowsAwareCommandLine_onMac_returnsTheList() {
     assertEquals(listOf("a", "b", "c"), windowsAwareCommandLine("a", "b", "c"))
   }
 
   @Test
-  @WithOs(OS.LINUX)
+  @WithOs(OS.UNIX)
   fun windowsAwareCommandLine_onLinux_returnsTheList() {
     assertEquals(listOf("a", "b", "c"), windowsAwareCommandLine("a", "b", "c"))
   }
@@ -56,7 +50,7 @@ class TaskUtilsTest {
   }
 
   @Test
-  @WithOs(OS.LINUX)
+  @WithOs(OS.UNIX)
   fun windowsAwareBashCommandLine_onLinux_returnsTheList() {
     assertEquals(listOf("a", "b", "c"), windowsAwareBashCommandLine("a", "b", "c"))
   }

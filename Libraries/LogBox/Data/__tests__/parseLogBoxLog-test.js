@@ -4,16 +4,14 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @flow strict-local
+ * @emails oncall+react_native
  * @format
- * @oncall react_native
+ * @flow strict-local
  */
 
 'use strict';
 
-import type {StackFrame} from '../../../Core/NativeExceptionsManager';
-
-const {parseLogBoxException, parseLogBoxLog} = require('../parseLogBoxLog');
+const {parseLogBoxLog, parseLogBoxException} = require('../parseLogBoxLog');
 
 describe('parseLogBoxLog', () => {
   it('parses strings', () => {
@@ -232,7 +230,7 @@ describe('parseLogBoxLog', () => {
       name: '',
       isComponentError: false,
       componentStack: '',
-      stack: ([]: Array<StackFrame>),
+      stack: [],
       id: 0,
       isFatal: true,
     };
@@ -269,7 +267,7 @@ describe('parseLogBoxLog', () => {
       name: '',
       isComponentError: false,
       componentStack: '',
-      stack: ([]: Array<StackFrame>),
+      stack: [],
       id: 0,
       isFatal: true,
     };
@@ -329,7 +327,7 @@ If you are sure the module exists, try these steps:
       name: '',
       isComponentError: false,
       componentStack: '',
-      stack: ([]: Array<StackFrame>),
+      stack: [],
       id: 0,
       isFatal: true,
     };
@@ -383,7 +381,7 @@ If you are sure the module exists, try these steps:
       name: '',
       isComponentError: false,
       componentStack: '',
-      stack: ([]: Array<StackFrame>),
+      stack: [],
       id: 0,
       isFatal: true,
     };
@@ -431,7 +429,7 @@ Please follow the instructions at: fburl.com/rn-remote-assets
       name: '',
       isComponentError: false,
       componentStack: '',
-      stack: ([]: Array<StackFrame>),
+      stack: [],
       id: 0,
       isFatal: true,
     };
@@ -477,7 +475,7 @@ Please follow the instructions at: fburl.com/rn-remote-assets
       name: '',
       isComponentError: false,
       componentStack: '',
-      stack: ([]: Array<StackFrame>),
+      stack: [],
       id: 0,
       isFatal: true,
     };

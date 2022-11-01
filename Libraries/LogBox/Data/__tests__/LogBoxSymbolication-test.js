@@ -4,23 +4,22 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @flow
+ * @emails oncall+react_native
  * @format
- * @oncall react_native
+ * @flow
  */
 
 'use strict';
 
-import type {SymbolicatedStackTrace} from '../../../Core/Devtools/symbolicateStackTrace';
 import type {StackFrame} from '../../../Core/NativeExceptionsManager';
-
-const LogBoxSymbolication = require('../LogBoxSymbolication');
 
 jest.mock('../../../Core/Devtools/symbolicateStackTrace');
 
+const LogBoxSymbolication = require('../LogBoxSymbolication');
+
 const symbolicateStackTrace: JestMockFn<
   $ReadOnlyArray<Array<StackFrame>>,
-  Promise<SymbolicatedStackTrace>,
+  Promise<Array<StackFrame>>,
 > = (require('../../../Core/Devtools/symbolicateStackTrace'): any);
 
 const createStack = (methodNames: Array<string>) =>
@@ -34,10 +33,7 @@ const createStack = (methodNames: Array<string>) =>
 describe('LogBoxSymbolication', () => {
   beforeEach(() => {
     jest.resetModules();
-    symbolicateStackTrace.mockImplementation(async stack => ({
-      stack,
-      codeFrame: null,
-    }));
+    symbolicateStackTrace.mockImplementation(async stack => stack);
   });
 
   it('symbolicates different stacks', () => {

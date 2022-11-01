@@ -13,7 +13,6 @@
 #include <react/debug/react_native_assert.h>
 #include <react/renderer/components/view/ViewPropsInterpolation.h>
 #include <react/renderer/core/ComponentDescriptor.h>
-#include <react/renderer/core/CoreFeatures.h>
 #include <react/renderer/core/EventDispatcher.h>
 #include <react/renderer/core/Props.h>
 #include <react/renderer/core/PropsParserContext.h>
@@ -95,9 +94,9 @@ class ConcreteComponentDescriptor : public ComponentDescriptor {
     concreteNonConstParentShadowNode->appendChild(childShadowNode);
   }
 
-  virtual Props::Shared cloneProps(
+  virtual SharedProps cloneProps(
       const PropsParserContext &context,
-      const Props::Shared &props,
+      const SharedProps &props,
       const RawProps &rawProps) const override {
     // Optimization:
     // Quite often nodes are constructed with default/empty props: the base
@@ -116,7 +115,7 @@ class ConcreteComponentDescriptor : public ComponentDescriptor {
     // Use the new-style iterator
     // Note that we just check if `Props` has this flag set, no matter
     // the type of ShadowNode; it acts as the single global flag.
-    if (CoreFeatures::enablePropIteratorSetter) {
+    if (Props::enablePropIteratorSetter) {
       rawProps.iterateOverValues([&](RawPropsPropNameHash hash,
                                      const char *propName,
                                      RawValue const &fn) {
@@ -127,19 +126,19 @@ class ConcreteComponentDescriptor : public ComponentDescriptor {
     return shadowNodeProps;
   };
 
-  Props::Shared interpolateProps(
+  SharedProps interpolateProps(
       const PropsParserContext &context,
       Float animationProgress,
-      const Props::Shared &props,
-      const Props::Shared &newProps) const override {
+      const SharedProps &props,
+      const SharedProps &newProps) const override {
 #ifdef ANDROID
     // On Android only, the merged props should have the same RawProps as the
     // final props struct
-    Props::Shared interpolatedPropsShared =
+    SharedProps interpolatedPropsShared =
         (newProps != nullptr ? cloneProps(context, newProps, newProps->rawProps)
                              : cloneProps(context, newProps, {}));
 #else
-    Props::Shared interpolatedPropsShared = cloneProps(context, newProps, {});
+    SharedProps interpolatedPropsShared = cloneProps(context, newProps, {});
 #endif
 
     if (ConcreteShadowNode::BaseTraits().check(

@@ -20,11 +20,11 @@ class OsTest {
   @get:Rule val osRule = OsRule()
 
   @Test
-  @WithOs(OS.LINUX, "amd64")
-  fun onLinuxAmd64_checksOsCorrectly() {
+  @WithOs(OS.UNIX)
+  fun onUnix_checksOsCorrectly() {
     assertFalse(Os.isWindows())
     assertFalse(Os.isMac())
-    assertTrue(Os.isLinuxAmd64())
+    assertFalse(Os.isLinuxAmd64())
   }
 
   @Test

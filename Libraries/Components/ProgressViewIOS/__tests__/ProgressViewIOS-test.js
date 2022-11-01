@@ -4,16 +4,17 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @flow
  * @format
- * @oncall react_native
+ * @emails oncall+react_native
+ * @flow
  */
 
 'use strict';
 
-const ReactNativeTestTools = require('../../../Utilities/ReactNativeTestTools');
-const ProgressViewIOS = require('../ProgressViewIOS');
 const React = require('react');
+const ProgressViewIOS = require('../ProgressViewIOS');
+
+const ReactNativeTestTools = require('../../../Utilities/ReactNativeTestTools');
 
 describe('<ProgressViewIOS />', () => {
   it('should render as expected', () => {

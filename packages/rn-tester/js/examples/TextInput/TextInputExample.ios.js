@@ -30,7 +30,7 @@ const TextInputSharedExamples = require('./TextInputSharedExamples.js');
 import type {RNTesterModuleExample} from '../../types/RNTesterTypes';
 
 class WithLabel extends React.Component<$FlowFixMeProps> {
-  render(): React.Node {
+  render() {
     return (
       <View style={styles.labelContainer}>
         <View style={styles.label}>
@@ -51,7 +51,7 @@ class TextInputAccessoryViewChangeTextExample extends React.Component<
     this.state = {text: 'Placeholder Text'};
   }
 
-  render(): React.Node {
+  render() {
     const inputAccessoryViewID = 'inputAccessoryView1';
     return (
       <View>
@@ -91,12 +91,11 @@ class TextInputAccessoryViewChangeKeyboardExample extends React.Component<
     });
   };
 
-  render(): React.Node {
+  render() {
     const inputAccessoryViewID = 'inputAccessoryView2';
     return (
       <View>
         <Text>Set InputAccessoryView with ID & switch keyboard:</Text>
-        {/* $FlowFixMe[incompatible-use] */}
         <TextInput
           style={styles.default}
           inputAccessoryViewID={inputAccessoryViewID}
@@ -127,7 +126,7 @@ class TextInputAccessoryViewDefaultDoneButtonExample extends React.Component<
     this.state = {text: ''};
   }
 
-  render(): React.Node {
+  render() {
     return (
       <TextInput
         style={styles.default}
@@ -145,7 +144,7 @@ class RewriteExampleKana extends React.Component<$FlowFixMeProps, any> {
     super(props);
     this.state = {text: ''};
   }
-  render(): React.Node {
+  render() {
     return (
       <View style={styles.rewriteContainer}>
         <TextInput
@@ -170,7 +169,7 @@ class SecureEntryExample extends React.Component<$FlowFixMeProps, any> {
       isSecureTextEntry: true,
     };
   }
-  render(): React.Node {
+  render() {
     return (
       <View>
         <TextInput
@@ -230,7 +229,7 @@ class AutogrowingTextInputExample extends React.Component<
     });
   }
 
-  render(): React.Node {
+  render() {
     const {style, multiline, ...props} = this.props;
     return (
       <View>
@@ -622,35 +621,6 @@ exports.examples = ([
     },
   },
   {
-    title: 'Editable and Read only',
-    render: function (): React.Node {
-      return (
-        <View>
-          <TextInput
-            placeholder="editable text input using editable prop"
-            style={styles.default}
-            editable
-          />
-          <TextInput
-            placeholder="uneditable text input using editable prop"
-            style={styles.default}
-            editable={false}
-          />
-          <TextInput
-            placeholder="editable text input using readOnly prop"
-            style={styles.default}
-            readOnly={false}
-          />
-          <TextInput
-            placeholder="uneditable text input using readOnly prop"
-            style={styles.default}
-            readOnly
-          />
-        </View>
-      );
-    },
-  },
-  {
     title: 'TextInput Intrinsic Size',
     render: function (): React.Node {
       return (
@@ -799,21 +769,6 @@ exports.examples = ([
     },
   },
   {
-    title: 'Text Auto Complete',
-    render: function (): React.Node {
-      return (
-        <View>
-          <WithLabel label="country">
-            <TextInput autoComplete="country" style={styles.default} />
-          </WithLabel>
-          <WithLabel label="one-time-code">
-            <TextInput autoComplete="one-time-code" style={styles.default} />
-          </WithLabel>
-        </View>
-      );
-    },
-  },
-  {
     title: 'Text Content Type',
     render: function (): React.Node {
       return (
@@ -858,45 +813,6 @@ exports.examples = ([
           <WithLabel label="showSoftInputOnFocus: false">
             <TextInput showSoftInputOnFocus={false} style={[styles.default]} />
           </WithLabel>
-        </View>
-      );
-    },
-  },
-  {
-    title: 'Line Break Strategy',
-    render: function (): React.Node {
-      const lineBreakStrategy = ['none', 'standard', 'hangul-word', 'push-out'];
-      const textByCode = {
-        en: 'lineBreakStrategy lineBreakStrategy lineBreakStrategy lineBreakStrategy',
-        ko: '한글개행한글개행 한글개행한글개행 한글개행한글개행 한글개행한글개행 한글개행한글개행 한글개행한글개행',
-        ja: 'かいぎょう かいぎょう かいぎょう かいぎょう かいぎょう かいぎょう',
-        cn: '改行 改行 改行 改行 改行 改行 改行 改行 改行 改行 改行 改行',
-      };
-      return (
-        <View>
-          {lineBreakStrategy.map(strategy => {
-            return (
-              <View key={strategy} style={{marginBottom: 12}}>
-                <Text
-                  style={{
-                    backgroundColor: 'lightgrey',
-                  }}>{`Strategy: ${strategy}`}</Text>
-                {Object.keys(textByCode).map(code => {
-                  return (
-                    <View key={code}>
-                      <Text style={{fontWeight: 'bold'}}>{`[${code}]`}</Text>
-                      <TextInput
-                        multiline
-                        lineBreakStrategyIOS={strategy}
-                        style={styles.default}
-                        defaultValue={textByCode[code]}
-                      />
-                    </View>
-                  );
-                })}
-              </View>
-            );
-          })}
         </View>
       );
     },

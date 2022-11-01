@@ -2,17 +2,9 @@
 
 exports[`TextInput tests should render as expected: should deep render when mocked (please verify output manually) 1`] = `
 <RCTSinglelineTextInputView
-  accessibilityState={
-    Object {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": undefined,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
   accessible={true}
   allowFontScaling={true}
+  blurOnSubmit={true}
   focusable={true}
   forwardedRef={null}
   mostRecentEventCount={0}
@@ -32,7 +24,6 @@ exports[`TextInput tests should render as expected: should deep render when mock
   onStartShouldSetResponder={[Function]}
   rejectResponderTermination={true}
   selection={null}
-  submitBehavior="blurAndSubmit"
   text=""
   underlineColorAndroid="transparent"
 />
@@ -40,17 +31,9 @@ exports[`TextInput tests should render as expected: should deep render when mock
 
 exports[`TextInput tests should render as expected: should deep render when not mocked (please verify output manually) 1`] = `
 <RCTSinglelineTextInputView
-  accessibilityState={
-    Object {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": undefined,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
   accessible={true}
   allowFontScaling={true}
+  blurOnSubmit={true}
   focusable={true}
   forwardedRef={null}
   mostRecentEventCount={0}
@@ -70,7 +53,6 @@ exports[`TextInput tests should render as expected: should deep render when not 
   onStartShouldSetResponder={[Function]}
   rejectResponderTermination={true}
   selection={null}
-  submitBehavior="blurAndSubmit"
   text=""
   underlineColorAndroid="transparent"
 />

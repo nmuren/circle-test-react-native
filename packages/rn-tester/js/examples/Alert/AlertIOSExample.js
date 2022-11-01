@@ -19,7 +19,7 @@ const {
   Alert,
 } = require('react-native');
 
-import {examples as SharedAlertExamples} from './AlertExample';
+const {examples: SharedAlertExamples} = require('./AlertExample');
 
 import type {RNTesterModuleExample} from '../../types/RNTesterTypes';
 
@@ -53,7 +53,7 @@ class PromptOptions extends React.Component<Props, State> {
     };
   }
 
-  render(): React.Node {
+  render() {
     return (
       <View>
         <Text style={styles.promptValue}>

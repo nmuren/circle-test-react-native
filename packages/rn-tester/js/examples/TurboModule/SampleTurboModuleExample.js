@@ -40,7 +40,6 @@ class SampleTurboModuleExample extends React.Component<{||}, State> {
   };
 
   // Add calls to methods in TurboModule here
-  // $FlowFixMe[missing-local-annot]
   _tests = {
     callback: () =>
       NativeSampleTurboModule.getValueWithCallback(callbackValue =>
@@ -130,7 +129,7 @@ class SampleTurboModuleExample extends React.Component<{||}, State> {
       | 'promise'
       | 'rejectPromise'
       | 'voidFunc',
-  ): React.Node {
+  ) {
     const result = this.state.testResults[name] || {};
     return (
       <View style={styles.result}>
@@ -140,7 +139,7 @@ class SampleTurboModuleExample extends React.Component<{||}, State> {
     );
   }
 
-  componentDidMount(): void {
+  componentDidMount() {
     if (global.__turboModuleProxy == null) {
       throw new Error(
         'Cannot load this example because TurboModule is not configured.',

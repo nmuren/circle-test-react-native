@@ -8,10 +8,10 @@
 package com.facebook.react.tests
 
 /** Annotation to specify an Operating System to override the "os.name" System Property. */
-@Retention(AnnotationRetention.RUNTIME) annotation class WithOs(val os: OS, val arch: String = "")
+@Retention(AnnotationRetention.RUNTIME) annotation class WithOs(val os: OS)
 
 enum class OS(val propertyName: String) {
-  WIN("Windows"),
-  MAC("MacOs"),
-  LINUX("Linux")
+  WIN("windows"),
+  MAC("macos"),
+  UNIX("unix")
 }

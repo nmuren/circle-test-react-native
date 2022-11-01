@@ -4,15 +4,16 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @flow strict-local
  * @format
- * @oncall react_native
+ * @emails oncall+react_native
+ * @flow strict-local
  */
 
-import {expectRendersMatchingSnapshot} from '../../../Utilities/ReactNativeTestTools';
-import View from '../../View/View';
-import Pressable from '../Pressable';
 import * as React from 'react';
+
+import Pressable from '../Pressable';
+import View from '../../View/View';
+import {expectRendersMatchingSnapshot} from '../../../Utilities/ReactNativeTestTools';
 
 describe('<Pressable />', () => {
   it('should render as expected', () => {

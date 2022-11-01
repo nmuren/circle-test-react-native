@@ -12,13 +12,12 @@ import org.junit.runner.Description
 import org.junit.runners.model.Statement
 
 /**
- * A JUnit [TestRule] to override values of [System.getProperties] with the support of the [WithOs]
- * annotation.
+ * A JUnit [TestRule] to override values of [System.getProperties] with the support of the
+ * [WithSystemProperty] annotation.
  */
 class OsRule : TestRule {
 
-  private var retainOs: String? = null
-  private var retainArch: String? = null
+  private var retain: String? = null
 
   override fun apply(statement: Statement, description: Description): Statement {
     return object : Statement() {
@@ -26,20 +25,13 @@ class OsRule : TestRule {
         val annotation = description.annotations.filterIsInstance<WithOs>().firstOrNull()
 
         annotation?.os?.propertyName?.let {
-          retainOs = System.getProperty(OS_NAME_KEY)
+          retain = System.getProperty(OS_NAME_KEY)
           System.setProperty(OS_NAME_KEY, it)
-        }
-        annotation?.arch?.let {
-          if (it.isNotBlank()) {
-            retainArch = System.getProperty(OS_ARCH_KEY)
-            System.setProperty(OS_ARCH_KEY, it)
-          }
         }
         try {
           statement.evaluate()
         } finally {
-          retainOs?.let { System.setProperty(OS_NAME_KEY, it) }
-          retainArch?.let { System.setProperty(OS_ARCH_KEY, it) }
+          retain?.let { System.setProperty(OS_NAME_KEY, it) }
         }
       }
     }
@@ -47,6 +39,5 @@ class OsRule : TestRule {
 
   companion object {
     const val OS_NAME_KEY = "os.name"
-    const val OS_ARCH_KEY = "os.arch"
   }
 }

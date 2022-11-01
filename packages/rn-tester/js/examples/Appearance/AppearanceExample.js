@@ -20,7 +20,7 @@ class ColorSchemeSubscription extends React.Component<
 > {
   _subscription: ?EventSubscription;
 
-  state: {colorScheme: ?string, ...} = {
+  state = {
     colorScheme: Appearance.getColorScheme(),
   };
 
@@ -37,7 +37,7 @@ class ColorSchemeSubscription extends React.Component<
     this._subscription?.remove();
   }
 
-  render(): React.Node {
+  render() {
     return (
       <RNTesterThemeContext.Consumer>
         {theme => {

@@ -33,6 +33,7 @@ selected_vm=""
 PACKAGE_VERSION=""
 
 test_android(){
+    generate_maven_artifacts
     if [ "$1" == "1" ]; then
         test_android_hermes
     elif [ "$1" == "2" ]; then
@@ -42,8 +43,7 @@ test_android(){
 
 generate_maven_artifacts(){
     rm -rf android
-    ./gradlew :ReactAndroid:installArchives || error "Couldn't generate React Native Maven artifacts"
-    ./gradlew :ReactAndroid:hermes-engine:installArchives || error "Couldn't generate Hermes Engine Maven artifacts"
+    ./gradlew :ReactAndroid:installArchives || error "Couldn't generate artifacts"
 
     success "Generated artifacts for Maven"
 }
@@ -108,10 +108,6 @@ kill_packagers(){
 
 init_template_app(){
     kill_packagers
-
-    if [ "$selected_platform" == "1" ]; then
-        generate_maven_artifacts
-    fi
 
     PACKAGE_VERSION=$(cat package.json \
     | grep version \

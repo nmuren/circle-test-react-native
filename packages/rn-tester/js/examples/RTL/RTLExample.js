@@ -167,7 +167,6 @@ function withRTLState(
       };
     }
 
-    // $FlowFixMe[missing-local-annot]
     render() {
       const setRTL = (isRTL: boolean) => this.setState({isRTL: isRTL});
       return (
@@ -207,7 +206,7 @@ class RTLToggleExample extends React.Component<any, RTLToggleState> {
     };
   }
 
-  render(): React.Node {
+  render() {
     return (
       <View>
         <View style={styles.directionBox}>
@@ -268,7 +267,7 @@ class AnimationExample extends React.Component<any, AnimationState> {
     };
   }
 
-  render(): React.Node {
+  render() {
     return (
       <View>
         <RTLToggler setRTL={this.props.setRTL} isRTL={this.props.isRTL} />

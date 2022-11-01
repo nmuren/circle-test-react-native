@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   separator: {
     height: 12,
   },
-  separatorText: {
+  separtorText: {
     fontSize: 10,
   },
   list: {

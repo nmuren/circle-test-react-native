@@ -1,9 +1,11 @@
 require_relative '../../scripts/react_native_pods'
 
 source 'https://cdn.cocoapods.org/'
-platform :ios, min_ios_version_supported
+platform :ios, '12.4'
 
-prepare_react_native_project!
+# Temporary solution to suppress duplicated GUID error.
+# Can be removed once we move to generate files outside pod install.
+install! 'cocoapods', :deterministic_uuids => false
 
 USE_FRAMEWORKS = ENV['USE_FRAMEWORKS'] == '1'
 IN_CI = ENV['CI'] == 'true'
@@ -15,7 +17,7 @@ if USE_FRAMEWORKS
   use_frameworks!
 end
 
-def pods(target_name, options = {}, use_flipper: !IN_CI && !USE_FRAMEWORKS)
+def pods(options = {}, use_flipper: false)
   project 'RNTesterPods.xcodeproj'
 
   fabric_enabled = true
@@ -23,7 +25,7 @@ def pods(target_name, options = {}, use_flipper: !IN_CI && !USE_FRAMEWORKS)
   # Hermes is now enabled by default.
   # The following line will only disable Hermes if the USE_HERMES envvar is SET to a value other than 1 (e.g. USE_HERMES=0).
   hermes_enabled = !ENV.has_key?('USE_HERMES') || ENV['USE_HERMES'] == '1'
-  puts "Configuring #{target_name} with Fabric #{fabric_enabled ? "enabled" : "disabled"}.#{hermes_enabled ? " Using Hermes engine." : ""}"
+  puts "Building RNTester with Fabric #{fabric_enabled ? "enabled" : "disabled"}.#{hermes_enabled ? " Using Hermes engine." : ""}"
 
   if ENV['RCT_NEW_ARCH_ENABLED'] == '1'
     # Custom fabric component is only supported when using codegen discovery.
@@ -51,16 +53,16 @@ def pods(target_name, options = {}, use_flipper: !IN_CI && !USE_FRAMEWORKS)
 end
 
 target 'RNTester' do
-  pods('RNTester')
+  pods({}, :use_flipper => !IN_CI && !USE_FRAMEWORKS)
 end
 
 target 'RNTesterUnitTests' do
-  pods('RNTesterUnitTests')
+  pods()
   pod 'React-RCTTest', :path => "./RCTTest"
 end
 
 target 'RNTesterIntegrationTests' do
-  pods('RNTesterIntegrationTests')
+  pods()
   pod 'React-RCTTest', :path => "./RCTTest"
 end
 

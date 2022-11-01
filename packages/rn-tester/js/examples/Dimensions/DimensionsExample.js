@@ -8,24 +8,38 @@
  * @flow
  */
 
+import type {EventSubscription} from 'react-native/Libraries/vendor/emitter/EventEmitter';
 import {Dimensions, Text, useWindowDimensions} from 'react-native';
 import * as React from 'react';
-import {useState, useEffect} from 'react';
 
-type Props = {dim: string};
+class DimensionsSubscription extends React.Component<
+  {dim: string, ...},
+  {dims: Object, ...},
+> {
+  state = {
+    dims: Dimensions.get(this.props.dim),
+  };
 
-function DimensionsSubscription(props: Props) {
-  const [dims, setDims] = useState(() => Dimensions.get(props.dim));
+  _dimensionsSubscription: ?EventSubscription;
 
-  useEffect(() => {
-    const subscription = Dimensions.addEventListener('change', dimensions => {
-      setDims(dimensions[props.dim]);
-    });
+  componentDidMount() {
+    this._dimensionsSubscription = Dimensions.addEventListener(
+      'change',
+      dimensions => {
+        this.setState({
+          dims: dimensions[this.props.dim],
+        });
+      },
+    );
+  }
 
-    return () => subscription.remove();
-  }, [props.dim]);
+  componentWillUnmount() {
+    this._dimensionsSubscription?.remove();
+  }
 
-  return <Text>{JSON.stringify(dims, null, 2)}</Text>;
+  render() {
+    return <Text>{JSON.stringify(this.state.dims, null, 2)}</Text>;
+  }
 }
 
 const DimensionsViaHook = () => {

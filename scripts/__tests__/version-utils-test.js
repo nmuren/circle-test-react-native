@@ -7,7 +7,11 @@
  * @format
  */
 
-const {parseVersion, isReleaseBranch} = require('../version-utils');
+const {
+  parseVersion,
+  isTaggedLatest,
+  isReleaseBranch,
+} = require('../version-utils');
 
 let execResult = null;
 jest.mock('shelljs', () => ({
@@ -15,12 +19,6 @@ jest.mock('shelljs', () => ({
     return {
       stdout: execResult,
     };
-  },
-  echo: message => {
-    console.log(message);
-  },
-  exit: exitCode => {
-    exit(exitCode);
   },
 }));
 
@@ -34,6 +32,18 @@ describe('version-utils', () => {
     it('should not identify as release branch', () => {
       expect(isReleaseBranch('main')).toBe(false);
       expect(isReleaseBranch('pull/32659')).toBe(false);
+    });
+  });
+  describe('isTaggedLatest', () => {
+    it('it should identify commit as tagged `latest`', () => {
+      execResult = '6c19dc3266b84f47a076b647a1c93b3c3b69d2c5\n';
+      expect(isTaggedLatest('6c19dc3266b84f47a076b647a1c93b3c3b69d2c5')).toBe(
+        true,
+      );
+    });
+    it('it should not identify commit as tagged `latest`', () => {
+      execResult = '6c19dc3266b84f47a076b647a1c93b3c3b69d2c5\n';
+      expect(isTaggedLatest('6c19dc3266b8')).toBe(false);
     });
   });
 
@@ -75,7 +85,6 @@ describe('version-utils', () => {
       expect(patch).toBe('0');
       expect(prerelease).toBeUndefined();
     });
-
     it('should parse pre-release version from tag', () => {
       const {version, major, minor, patch, prerelease} =
         parseVersion('v0.66.1-rc.4');

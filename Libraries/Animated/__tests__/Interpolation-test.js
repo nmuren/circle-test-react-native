@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @format
- * @oncall react_native
+ * @emails oncall+react_native
  */
 
 'use strict';
 
-import Easing from '../Easing';
-import AnimatedInterpolation from '../nodes/AnimatedInterpolation';
+const AnimatedInterpolation = require('../nodes/AnimatedInterpolation');
+const Easing = require('../Easing');
 
 describe('Interpolation', () => {
   it('should work with defaults', () => {

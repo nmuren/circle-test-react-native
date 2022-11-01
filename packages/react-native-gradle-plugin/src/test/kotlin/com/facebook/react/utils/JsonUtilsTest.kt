@@ -51,8 +51,7 @@ class JsonUtilsTest {
           ]
         }
       }
-      """
-                .trimIndent())
+      """.trimIndent())
 
     val parsed = JsonUtils.fromCodegenJson(oldJsonConfig)!!
 
@@ -79,8 +78,7 @@ class JsonUtilsTest {
           }
         }
       }
-      """
-                .trimIndent())
+      """.trimIndent())
 
     val parsed = JsonUtils.fromCodegenJson(validJson)!!
 

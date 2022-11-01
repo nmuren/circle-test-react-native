@@ -12,7 +12,7 @@ load(
     "//tools/build_defs/oss:rn_defs.bzl",
     "APPLE",
     "YOGA_APPLE_TARGET",
-    "js_library_glob",
+    "js_glob",
     "make_resource_glob",
     "react_fabric_component_plugin_provider",
     "react_module_plugin_providers",
@@ -46,7 +46,7 @@ yarn_workspace(
 
 rn_library(
     name = "rn-tester",
-    srcs = js_library_glob(
+    srcs = js_glob(
         [
             "js",
             "NativeModuleExample",
@@ -63,6 +63,7 @@ rn_library(
     codegen_components = True,
     labels = [
         "pfh:ReactNative_CommonInfrastructurePlaceholder",
+        "supermodule:xplat/default/public.react_native.playground",
     ],
     native_component_spec_name = "AppSpecs",
     skip_processors = True,
@@ -307,6 +308,7 @@ rn_xplat_cxx_library2(
     contacts = ["oncall+react_native@xmail.facebook.com"],
     labels = [
         "pfh:ReactNative_CommonInfrastructurePlaceholder",
+        "supermodule:xplat/default/public.react_native.infra",
     ],
     plugins = [
         react_fabric_component_plugin_provider("RNTMyNativeView", "RNTMyNativeViewCls"),
