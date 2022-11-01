@@ -2,23 +2,6 @@
 
 exports[`<Pressable /> should render as expected: should deep render when mocked (please verify output manually) 1`] = `
 <View
-  accessibilityState={
-    Object {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": undefined,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    Object {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -38,23 +21,6 @@ exports[`<Pressable /> should render as expected: should deep render when mocked
 
 exports[`<Pressable /> should render as expected: should deep render when not mocked (please verify output manually) 1`] = `
 <View
-  accessibilityState={
-    Object {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": undefined,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    Object {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
   collapsable={false}
   focusable={true}
@@ -88,19 +54,7 @@ exports[`<Pressable disabled={true} /> should be disabled when disabled is true:
 <View
   accessibilityState={
     Object {
-      "busy": undefined,
-      "checked": undefined,
       "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    Object {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
     }
   }
   accessible={true}
@@ -124,19 +78,7 @@ exports[`<Pressable disabled={true} /> should be disabled when disabled is true:
 <View
   accessibilityState={
     Object {
-      "busy": undefined,
-      "checked": undefined,
       "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    Object {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
     }
   }
   accessible={true}
@@ -176,19 +118,7 @@ exports[`<Pressable disabled={true} accessibilityState={{}} /> should be disable
 <View
   accessibilityState={
     Object {
-      "busy": undefined,
-      "checked": undefined,
       "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    Object {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
     }
   }
   accessible={true}
@@ -212,19 +142,7 @@ exports[`<Pressable disabled={true} accessibilityState={{}} /> should be disable
 <View
   accessibilityState={
     Object {
-      "busy": undefined,
-      "checked": undefined,
       "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    Object {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
     }
   }
   accessible={true}
@@ -266,19 +184,8 @@ exports[`<Pressable disabled={true} accessibilityState={{checked: true}} /> shou
 <View
   accessibilityState={
     Object {
-      "busy": undefined,
       "checked": true,
       "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    Object {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
     }
   }
   accessible={true}
@@ -302,19 +209,8 @@ exports[`<Pressable disabled={true} accessibilityState={{checked: true}} /> shou
 <View
   accessibilityState={
     Object {
-      "busy": undefined,
       "checked": true,
       "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    Object {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
     }
   }
   accessible={true}
@@ -364,19 +260,7 @@ exports[`<Pressable disabled={true} accessibilityState={{disabled: false}} /> sh
 <View
   accessibilityState={
     Object {
-      "busy": undefined,
-      "checked": undefined,
       "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    Object {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
     }
   }
   accessible={true}
@@ -400,19 +284,7 @@ exports[`<Pressable disabled={true} accessibilityState={{disabled: false}} /> sh
 <View
   accessibilityState={
     Object {
-      "busy": undefined,
-      "checked": undefined,
       "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    Object {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
     }
   }
   accessible={true}

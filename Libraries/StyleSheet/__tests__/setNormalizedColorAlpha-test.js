@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @format
- * @oncall react_native
+ * @emails oncall+react_native
  */
 
 'use strict';
 
-const normalizeColor = require('../normalizeColor');
 const setNormalizedColorAlpha = require('../setNormalizedColorAlpha');
+const normalizeColor = require('../normalizeColor');
 
 describe('setNormalizedColorAlpha', function () {
   it('should adjust the alpha of the color passed in', function () {

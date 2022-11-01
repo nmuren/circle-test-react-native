@@ -21,6 +21,13 @@ import {View, StyleSheet} from 'react-native';
 import RNTesterPlatformTest from '../PlatformTest/RNTesterPlatformTest';
 import {check_PointerEvent, useTestEventHandler} from './PointerEventSupport';
 
+const UNINITIALIZED_LAYOUT: Layout = {
+  x: NaN,
+  y: NaN,
+  width: NaN,
+  height: NaN,
+};
+
 const eventList = [
   'pointerOver',
   'pointerEnter',
@@ -36,9 +43,12 @@ function PointerEventAttributesHoverablePointersTestCase(
 ) {
   const {harness} = props;
 
-  const detected_pointertypesRef = useRef(({}: {[string]: boolean}));
-  const detected_eventTypesRef = useRef(({}: {[string]: boolean}));
+  const detected_pointertypesRef = useRef({});
+  const detected_eventTypesRef = useRef({});
   const expectedPointerIdRef = useRef(NaN);
+
+  const rectSquare1Ref = useRef<Layout>({...UNINITIALIZED_LAYOUT});
+  const rectSquare2Ref = useRef<Layout>({...UNINITIALIZED_LAYOUT});
 
   const [square1Visible, setSquare1Visible] = useState(true);
   const [square2Visible, setSquare2Visible] = useState(false);
@@ -139,6 +149,7 @@ function PointerEventAttributesHoverablePointersTestCase(
         }, pointerTestName + "'s ClientX and ClientY attributes are correct.");
       }
 
+      // TODO: check_PointerEvent
       check_PointerEvent(harness, event, eventType, {
         testNamePrefix,
       });
@@ -168,68 +179,79 @@ function PointerEventAttributesHoverablePointersTestCase(
     [harness],
   );
 
-  const square1Ref = useRef();
   const square1Handlers = useTestEventHandler(eventList, (event, eventType) => {
     if (!square1Visible) {
       return;
     }
-
-    const square1Elem = square1Ref.current;
-    if (square1Elem != null) {
-      square1Elem.measure((x, y, width, height, pageX, pageY) => {
-        checkPointerEventAttributes(
-          event,
-          eventType,
-          {x: pageX, y: pageY, width, height},
-          '',
-          'mouse',
-        );
-        if (
-          Object.keys(detected_eventTypesRef.current).length ===
-          eventList.length
-        ) {
-          setSquare1Visible(false);
-          detected_eventTypesRef.current = ({}: {[string]: boolean});
-          setSquare2Visible(true);
-          expectedPointerIdRef.current = NaN;
-        }
-      });
+    checkPointerEventAttributes(
+      event,
+      eventType,
+      rectSquare1Ref.current,
+      '',
+      'mouse',
+    );
+    if (
+      Object.keys(detected_eventTypesRef.current).length === eventList.length
+    ) {
+      setSquare1Visible(false);
+      detected_eventTypesRef.current = {};
+      setSquare2Visible(true);
+      expectedPointerIdRef.current = NaN;
     }
   });
 
-  const square2Ref = useRef();
   const square2Handlers = useTestEventHandler(eventList, (event, eventType) => {
-    const square2Elem = square2Ref.current;
-    if (square2Elem != null) {
-      square2Elem.measure((x, y, width, height, pageX, pageY) => {
-        checkPointerEventAttributes(
-          event,
-          eventType,
-          {x: pageX, y: pageY, width, height},
-          'Inner frame ',
-          'mouse',
-        );
-        if (
-          Object.keys(detected_eventTypesRef.current).length ===
-          eventList.length
-        ) {
-          setSquare2Visible(false);
-          // TODO: Mark test as done
-        }
-      });
+    checkPointerEventAttributes(
+      event,
+      eventType,
+      rectSquare2Ref.current,
+      'Inner frame ',
+      'mouse',
+    );
+    if (
+      Object.keys(detected_eventTypesRef.current).length === eventList.length
+    ) {
+      setSquare2Visible(false);
+      // TODO: Mark test as done
     }
   });
+
+  const updateSquare1Layout = useCallback(evt => {
+    const elem = evt.target;
+    if (typeof elem !== 'number' && elem != null) {
+      elem.measureInWindow((x, y, width, height) => {
+        rectSquare1Ref.current = {x, y, width, height};
+      });
+    }
+  }, []);
+
+  const updateSquare2Layout = useCallback(evt => {
+    const elem = evt.target;
+    if (typeof elem !== 'number' && elem != null) {
+      elem.measureInWindow((x, y, width, height) => {
+        rectSquare2Ref.current = {x, y, width, height};
+      });
+    }
+  }, []);
 
   return (
     <View style={styles.root}>
       <View style={styles.squareContainer}>
         {square1Visible && (
-          <View ref={square1Ref} style={styles.square1} {...square1Handlers} />
+          <View
+            onLayout={updateSquare1Layout}
+            style={styles.square1}
+            {...square1Handlers}
+          />
         )}
       </View>
       <View style={styles.squareContainer}>
         {square2Visible && (
-          <View ref={square2Ref} style={styles.square2} {...square2Handlers} />
+          <View
+            onLayout={updateSquare2Layout}
+            style={styles.square2}
+            {...square2Handlers}
+          />
         )}
       </View>
     </View>

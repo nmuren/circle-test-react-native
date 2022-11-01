@@ -27,7 +27,7 @@ class PrepareBoostTaskTest {
   }
 
   @Test
-  fun prepareBoostTask_copiesCMakefile() {
+  fun prepareBoostTask_copiesMakefile() {
     val boostpath = tempFolder.newFolder("boostpath")
     val output = tempFolder.newFolder("output")
     val project = createProject()
@@ -37,13 +37,13 @@ class PrepareBoostTaskTest {
           it.boostVersion.set("1.0.0")
           it.outputDir.set(output)
         }
-    File(project.projectDir, "src/main/jni/third-party/boost/CMakeLists.txt").apply {
+    File(project.projectDir, "src/main/jni/third-party/boost/Android.mk").apply {
       parentFile.mkdirs()
       createNewFile()
     }
     task.taskAction()
 
-    assertTrue(output.listFiles()!!.any { it.name == "CMakeLists.txt" })
+    assertTrue(output.listFiles()!!.any { it.name == "Android.mk" })
   }
 
   @Test

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @format
- * @oncall react_native
+ * @emails oncall+react_native
  */
 
 import {getUrlCacheBreaker, setUrlCacheBreaker} from '../AssetUtils';

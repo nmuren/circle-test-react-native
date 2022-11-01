@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @format
- * @oncall react_native
+ * @emails oncall+react_native
  */
 
-import Text from '../../../Text/Text';
+import {Text} from 'react-native';
 import * as React from 'react';
 
 export const DoesNotUseKey = () => {

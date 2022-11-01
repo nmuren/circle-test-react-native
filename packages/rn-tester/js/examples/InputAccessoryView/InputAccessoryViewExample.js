@@ -24,7 +24,7 @@ const {
 
 type MessageProps = $ReadOnly<{||}>;
 class Message extends React.PureComponent<MessageProps> {
-  render(): React.Node {
+  render() {
     return (
       <View style={styles.textBubbleBackground}>
         <Text style={styles.text}>Text Message</Text>
@@ -36,9 +36,9 @@ class Message extends React.PureComponent<MessageProps> {
 type TextInputProps = $ReadOnly<{||}>;
 type TextInputState = {|text: string|};
 class TextInputBar extends React.PureComponent<TextInputProps, TextInputState> {
-  state: TextInputState = {text: ''};
+  state = {text: ''};
 
-  render(): React.Node {
+  render() {
     return (
       <View style={styles.textInputContainer}>
         <TextInput
@@ -63,7 +63,7 @@ class TextInputBar extends React.PureComponent<TextInputProps, TextInputState> {
 const BAR_HEIGHT = 44;
 type InputAccessoryProps = $ReadOnly<{||}>;
 class InputAccessoryViewExample extends React.Component<InputAccessoryProps> {
-  render(): React.Node {
+  render() {
     return (
       <>
         <ScrollView style={styles.fill} keyboardDismissMode="interactive">

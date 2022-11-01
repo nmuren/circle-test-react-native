@@ -4,16 +4,15 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @flow strict-local
  * @format
- * @oncall react_native
+ * @emails oncall+react_native
+ * @flow strict-local
  */
 
-import Text from '../../../Text/Text';
-
-const render = require('../../../../jest/renderer');
-const LogBoxButton = require('../LogBoxButton').default;
 const React = require('react');
+const LogBoxButton = require('../LogBoxButton').default;
+const render = require('../../../../jest/renderer');
+import Text from '../../../Text/Text';
 
 describe('LogBoxButton', () => {
   it('should render only a view without an onPress', () => {

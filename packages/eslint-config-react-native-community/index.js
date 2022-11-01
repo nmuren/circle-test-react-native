@@ -37,13 +37,13 @@ module.exports = {
     {
       files: ['*.js'],
       parser: '@babel/eslint-parser',
-      plugins: ['ft-flow'],
+      plugins: ['flowtype'],
       rules: {
         // Flow Plugin
-        // The following rules are made available via `eslint-plugin-ft-flow`
+        // The following rules are made available via `eslint-plugin-flowtype`
 
-        'ft-flow/define-flow-type': 1,
-        'ft-flow/use-flow-type': 1,
+        'flowtype/define-flow-type': 1,
+        'flowtype/use-flow-type': 1,
       },
     },
     {
@@ -53,10 +53,7 @@ module.exports = {
       rules: {
         '@typescript-eslint/no-unused-vars': [
           'error',
-          {
-            argsIgnorePattern: '^_',
-            destructuredArrayIgnorePattern: '^_',
-          },
+          {argsIgnorePattern: '^_'},
         ],
         'no-unused-vars': 'off',
         'no-shadow': 'off',

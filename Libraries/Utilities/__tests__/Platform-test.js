@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @format
- * @oncall react_native
+ * @emails oncall+react_native
  */
 
 'use strict';
 
-const PlatformAndroid = require('../Platform.android');
 const PlatformIOS = require('../Platform.ios');
+const PlatformAndroid = require('../Platform.android');
 
 describe('Platform', () => {
   describe('OS', () => {

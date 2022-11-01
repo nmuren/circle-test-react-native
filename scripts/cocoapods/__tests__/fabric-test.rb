@@ -5,7 +5,6 @@
 
 require "test/unit"
 require_relative "../fabric.rb"
-require_relative "../utils.rb"
 require_relative "./test_utils/podSpy.rb"
 
 class FabricTest < Test::Unit::TestCase
@@ -14,30 +13,24 @@ class FabricTest < Test::Unit::TestCase
         podSpy_cleanUp()
     end
 
-    def teardown
-        podSpy_cleanUp()
-    end
-
-    # ================== #
-    # TEST - setupFabric #
-    # ================== #
     def test_setupFabric_installsPods
         # Arrange
         prefix = "../.."
 
         # Act
-        setup_fabric!(:react_native_path => prefix)
+        setup_fabric!(prefix)
 
         # Assert
         check_installed_pods(prefix)
     end
 
     def check_installed_pods(prefix)
-        assert_equal($podInvocationCount, 5)
+        assert_equal($podInvocationCount, 6)
 
         check_pod("React-Fabric", :path => "#{prefix}/ReactCommon")
         check_pod("React-rncore", :path => "#{prefix}/ReactCommon")
         check_pod("React-graphics", :path => "#{prefix}/ReactCommon/react/renderer/graphics")
+        check_pod("React-jsi/Fabric", :path => "#{prefix}/ReactCommon/jsi")
         check_pod("React-RCTFabric", :path => "#{prefix}/React", :modular_headers => true)
         check_pod("RCT-Folly/Fabric", :podspec => "#{prefix}/third-party-podspecs/RCT-Folly.podspec")
     end
@@ -52,4 +45,5 @@ class FabricTest < Test::Unit::TestCase
 
         assert_equal(params, expected_params)
     end
+
 end

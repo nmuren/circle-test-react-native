@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @format
- * @oncall react_native
+ * @emails oncall+react_native
  */
 
 'use strict';
 
-import AnimatedImplementation from '../AnimatedImplementation';
-import AnimatedMock from '../AnimatedMock';
+const AnimatedMock = require('../AnimatedMock');
+const AnimatedImplementation = require('../AnimatedImplementation');
 
 describe('Animated Mock', () => {
   it('matches implementation keys', () => {

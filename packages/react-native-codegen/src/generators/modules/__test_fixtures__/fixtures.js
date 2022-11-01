@@ -275,42 +275,6 @@ const SIMPLE_NATIVE_MODULES: SchemaType = {
               ],
             },
           },
-          {
-            name: 'getEnums',
-            optional: false,
-            typeAnnotation: {
-              type: 'FunctionTypeAnnotation',
-              returnTypeAnnotation: {
-                type: 'StringTypeAnnotation',
-              },
-              params: [
-                {
-                  name: 'enumInt',
-                  optional: false,
-                  typeAnnotation: {
-                    type: 'EnumDeclaration',
-                    memberType: 'NumberTypeAnnotation',
-                  },
-                },
-                {
-                  name: 'enumFloat',
-                  optional: false,
-                  typeAnnotation: {
-                    type: 'EnumDeclaration',
-                    memberType: 'NumberTypeAnnotation',
-                  },
-                },
-                {
-                  name: 'enumString',
-                  optional: false,
-                  typeAnnotation: {
-                    type: 'EnumDeclaration',
-                    memberType: 'StringTypeAnnotation',
-                  },
-                },
-              ],
-            },
-          },
         ],
       },
       moduleNames: ['SampleTurboModule'],
@@ -1598,87 +1562,6 @@ const CXX_ONLY_NATIVE_MODULES: SchemaType = {
                       type: 'TypeAliasTypeAnnotation',
                       name: 'ObjectAlias',
                     },
-                  },
-                },
-              ],
-            },
-          },
-          {
-            name: 'getEnums',
-            optional: false,
-            typeAnnotation: {
-              type: 'FunctionTypeAnnotation',
-              returnTypeAnnotation: {
-                type: 'StringTypeAnnotation',
-              },
-              params: [
-                {
-                  name: 'enumInt',
-                  optional: false,
-                  typeAnnotation: {
-                    type: 'EnumDeclaration',
-                    memberType: 'NumberTypeAnnotation',
-                  },
-                },
-                {
-                  name: 'enumFloat',
-                  optional: false,
-                  typeAnnotation: {
-                    type: 'EnumDeclaration',
-                    memberType: 'NumberTypeAnnotation',
-                  },
-                },
-                {
-                  name: 'enumString',
-                  optional: false,
-                  typeAnnotation: {
-                    type: 'EnumDeclaration',
-                    memberType: 'StringTypeAnnotation',
-                  },
-                },
-              ],
-            },
-          },
-          {
-            name: 'getUnion',
-            optional: false,
-            typeAnnotation: {
-              type: 'FunctionTypeAnnotation',
-              returnTypeAnnotation: {
-                type: 'UnionTypeAnnotation',
-                memberType: 'ObjectTypeAnnotation',
-              },
-              params: [
-                {
-                  name: 'chooseInt',
-                  optional: false,
-                  typeAnnotation: {
-                    type: 'UnionTypeAnnotation',
-                    memberType: 'NumberTypeAnnotation',
-                  },
-                },
-                {
-                  name: 'chooseFloat',
-                  optional: false,
-                  typeAnnotation: {
-                    type: 'UnionTypeAnnotation',
-                    memberType: 'NumberTypeAnnotation',
-                  },
-                },
-                {
-                  name: 'chooseObject',
-                  optional: false,
-                  typeAnnotation: {
-                    type: 'UnionTypeAnnotation',
-                    memberType: 'ObjectTypeAnnotation',
-                  },
-                },
-                {
-                  name: 'chooseString',
-                  optional: false,
-                  typeAnnotation: {
-                    type: 'UnionTypeAnnotation',
-                    memberType: 'StringTypeAnnotation',
                   },
                 },
               ],

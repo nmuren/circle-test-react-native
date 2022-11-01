@@ -79,7 +79,7 @@ const ShareMessageWithTitle = () => {
 };
 
 const SharedAction = () => {
-  const [shared, setShared] = React.useState<?string>();
+  const [shared, setShared] = React.useState();
 
   const sharedAction = async () => {
     try {

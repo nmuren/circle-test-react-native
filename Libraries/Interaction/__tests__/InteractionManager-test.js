@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @format
- * @oncall react_native
+ * @emails oncall+react_native
  */
 
 'use strict';
@@ -168,7 +168,7 @@ describe('promise tasks', () => {
   }
   beforeEach(() => {
     jest.resetModules();
-    jest.useFakeTimers('legacy');
+    jest.useFakeTimers();
     InteractionManager = require('../InteractionManager');
     BatchedBridge = require('../../BatchedBridge/BatchedBridge');
     sequenceId = 0;

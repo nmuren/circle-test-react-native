@@ -27,7 +27,7 @@ class PrepareLibeventTaskTest {
   }
 
   @Test
-  fun prepareBoostTask_copiesCMakefile() {
+  fun prepareBoostTask_copiesMakefile() {
     val libeventPath = tempFolder.newFolder("libeventPath")
     val output = tempFolder.newFolder("output")
     val project = createProject()
@@ -37,13 +37,13 @@ class PrepareLibeventTaskTest {
           it.libeventVersion.set("1.0.0")
           it.outputDir.set(output)
         }
-    File(project.projectDir, "src/main/jni/third-party/libevent/CMakeLists.txt").apply {
+    File(project.projectDir, "src/main/jni/third-party/libevent/Android.mk").apply {
       parentFile.mkdirs()
       createNewFile()
     }
     task.taskAction()
 
-    assertTrue(File(output, "CMakeLists.txt").exists())
+    assertTrue(File(output, "Android.mk").exists())
   }
 
   @Test

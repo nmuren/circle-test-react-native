@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @format
- * @oncall react_native
+ * @emails oncall+react_native
  */
 
 'use strict';
 
-const flattenStyle = require('../flattenStyle');
 const StyleSheet = require('../StyleSheet');
+const flattenStyle = require('../flattenStyle');
 
 function getFixture() {
   return StyleSheet.create({

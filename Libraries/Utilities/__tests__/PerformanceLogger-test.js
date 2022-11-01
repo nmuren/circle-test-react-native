@@ -8,10 +8,9 @@
  * @flow strict-local
  */
 
-import type {IPerformanceLogger} from '../createPerformanceLogger';
-
-import createPerformanceLogger from '../createPerformanceLogger';
 import GlobalPerformanceLogger from '../GlobalPerformanceLogger';
+import createPerformanceLogger from '../createPerformanceLogger';
+import type {IPerformanceLogger} from '../createPerformanceLogger';
 
 const TIMESPAN_1 = '<timespan_1>';
 const EXTRA_KEY = '<extra_key>';

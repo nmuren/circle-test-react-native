@@ -28,7 +28,7 @@ class SafeAreaViewExample extends React.Component<
     modalVisible: boolean,
   |},
 > {
-  state: {modalVisible: boolean} = {
+  state = {
     modalVisible: false,
   };
 
@@ -36,7 +36,7 @@ class SafeAreaViewExample extends React.Component<
     this.setState({modalVisible: visible});
   };
 
-  render(): React.Node {
+  render() {
     return (
       <View>
         <Modal
@@ -65,7 +65,7 @@ class SafeAreaViewExample extends React.Component<
 }
 
 class IsIPhoneXExample extends React.Component<{...}> {
-  render(): React.Node {
+  render() {
     return (
       <View>
         <Text>

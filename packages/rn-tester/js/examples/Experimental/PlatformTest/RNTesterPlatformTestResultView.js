@@ -19,13 +19,11 @@ import type {
 } from './RNTesterPlatformTestTypes';
 
 import RNTesterPlatformTestMinimizedResultView from './RNTesterPlatformTestMinimizedResultView';
-import RNTesterPlatformTestResultsText from './RNTesterPlatformTestResultsText';
 
 import * as React from 'react';
 import {useMemo, useState, useCallback} from 'react';
 import {
   Button,
-  Switch,
   View,
   Text,
   StyleSheet,
@@ -42,17 +40,14 @@ const DISPLAY_STATUS_MAPPING: {[PlatformTestResultStatus]: string} = {
   PASS: 'Pass',
   FAIL: 'Fail',
   ERROR: 'Error',
-  SKIPPED: 'Skipped',
 };
 
 type FilterModalProps = $ReadOnly<{
   filterText: string,
   setFilterText: (newFilterText: string) => void,
-  filterFail: boolean,
-  setFilterFail: (newFilterFail: boolean) => void,
 }>;
 function FilterModalButton(props: FilterModalProps) {
-  const {filterText, setFilterText, filterFail, setFilterFail} = props;
+  const {filterText, setFilterText} = props;
 
   const [modalVisible, setModalVisible] = useState(false);
   const [pendingFilterText, setPendingFilterText] = useState(filterText);
@@ -71,14 +66,7 @@ function FilterModalButton(props: FilterModalProps) {
     setModalVisible(false);
   }, []);
 
-  const onFilterFailStatus = useCallback(
-    (value: boolean) => {
-      setFilterFail(value);
-    },
-    [setFilterFail],
-  );
-
-  const onPendingTextChange = useCallback((newText: string) => {
+  const onPendingTextChange = useCallback(newText => {
     setPendingFilterText(newText);
   }, []);
 
@@ -92,7 +80,7 @@ function FilterModalButton(props: FilterModalProps) {
         transparent={true}>
         <SafeAreaView style={styles.filterModalRoot}>
           <KeyboardAvoidingView
-            style={styles.filterModalKeyboardAvoidingRoot}
+            style={styles.filterModalKeboardAvoidingRoot}
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
             <View style={styles.filterModalContainer}>
               <View style={styles.filterModalContentContainer}>
@@ -110,15 +98,6 @@ function FilterModalButton(props: FilterModalProps) {
                   onChangeText={onPendingTextChange}
                   onSubmitEditing={onFilterSubmit}
                 />
-                <View style={styles.filterFail}>
-                  <Text>
-                    {filterFail ? 'Filter All Status' : 'Filter Only Failed'}
-                  </Text>
-                  <Switch
-                    value={filterFail}
-                    onValueChange={onFilterFailStatus}
-                  />
-                </View>
               </View>
               <View style={styles.filterModalActionsContainer}>
                 <Button title="Cancel" onPress={onFilterCancel} />
@@ -194,22 +173,17 @@ export default function RNTesterPlatformTestResultView(
   const {numPending, reset, results, style} = props;
 
   const [filterText, setFilterText] = useState('');
-  const [filterFailStatus, setFilterFailStatus] = useState(false);
 
   const filteredResults = useMemo(() => {
-    const statusFiltered = filterFailStatus
-      ? results.filter(result => result.status === 'FAIL')
-      : results;
-
     if (filterText === '') {
-      return statusFiltered;
+      return results;
     }
-    return statusFiltered.filter(result =>
+    return results.filter(result =>
       result.name.toLowerCase().includes(filterText.toLowerCase()),
     );
-  }, [filterFailStatus, filterText, results]);
+  }, [filterText, results]);
 
-  const {numPass, numFail, numError, numSkipped} = useMemo(
+  const {numPass, numFail, numError} = useMemo(
     () =>
       filteredResults.reduce(
         (acc, result) => {
@@ -220,15 +194,12 @@ export default function RNTesterPlatformTestResultView(
               return {...acc, numFail: acc.numFail + 1};
             case 'ERROR':
               return {...acc, numError: acc.numError + 1};
-            case 'SKIPPED':
-              return {...acc, numSkipped: acc.numSkipped + 1};
           }
         },
         {
           numPass: 0,
           numFail: 0,
           numError: 0,
-          numSkipped: 0,
         },
       ),
     [filteredResults],
@@ -237,7 +208,6 @@ export default function RNTesterPlatformTestResultView(
   const [resultsExpanded, setResultsExpanded] = useState(false);
 
   const handleReset = useCallback(() => {
-    setFilterFailStatus(false);
     setFilterText('');
     reset();
     setResultsExpanded(false);
@@ -251,11 +221,6 @@ export default function RNTesterPlatformTestResultView(
     setResultsExpanded(false);
   }, []);
 
-  const filteredNotice = `Filtered${filterFailStatus ? ' (Failed)' : ''}${
-    filterText !== '' ? `: ${filterText}` : ''
-  }
-  `;
-
   return (
     <>
       <RNTesterPlatformTestMinimizedResultView
@@ -263,7 +228,6 @@ export default function RNTesterPlatformTestResultView(
         numError={numError}
         numPass={numPass}
         numPending={numPending}
-        numSkipped={numSkipped}
         onPress={handleMinimizedPress}
         style={style}
       />
@@ -280,23 +244,38 @@ export default function RNTesterPlatformTestResultView(
           <View style={styles.resultsHeader}>
             <View style={styles.titleContainer}>
               <Text style={styles.title}>Results</Text>
-              <Text style={styles.filteredText}>{filteredNotice}</Text>
+              {filterText !== '' ? (
+                <Text style={styles.filteredText}>
+                  (Filtered: '{filterText}')
+                </Text>
+              ) : null}
               <Text style={styles.summaryContainer}>
-                <RNTesterPlatformTestResultsText
-                  numError={numError}
-                  numFail={numFail}
-                  numPass={numPass}
-                  numPending={numPending}
-                  numSkipped={numSkipped}
-                />
+                <Text>
+                  {numPass} <Text style={styles.passText}>Pass</Text>
+                </Text>
+                {'  '}
+                <Text>
+                  {numFail} <Text style={styles.failText}>Fail</Text>
+                </Text>
+                {'  '}
+                <Text>
+                  {numError} <Text style={styles.errorText}>Error</Text>
+                </Text>
+                {numPending > 0 ? (
+                  <>
+                    {' '}
+                    <Text>
+                      {numPending}{' '}
+                      <Text style={styles.pendingText}>Pending</Text>
+                    </Text>
+                  </>
+                ) : null}
               </Text>
             </View>
             <View style={styles.actionsContainer}>
               <FilterModalButton
                 filterText={filterText}
                 setFilterText={setFilterText}
-                filterFail={filterFailStatus}
-                setFilterFail={setFilterFailStatus}
               />
               <View style={styles.buttonSpacer} />
               <Button title="Reset" onPress={handleReset} />
@@ -401,16 +380,10 @@ const styles = StyleSheet.create({
     borderColor: 'rgb(171, 171, 171)',
     borderRadius: 8,
   },
-  filterModalKeyboardAvoidingRoot: {
+  filterModalKeboardAvoidingRoot: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  filterFail: {
-    alignItems: 'center',
-    padding: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
   },
   passText: {
     color: 'green',
@@ -425,9 +398,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingTop: 8,
     flex: 0,
-  },
-  skippedText: {
-    color: 'blue',
   },
   table: {
     flex: 1,
@@ -476,5 +446,4 @@ const STATUS_TEXT_STYLE_MAPPING: {[PlatformTestResultStatus]: TextStyle} = {
   PASS: styles.passText,
   FAIL: styles.failText,
   ERROR: styles.errorText,
-  SKIPPED: styles.skippedText,
 };

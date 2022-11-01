@@ -10,8 +10,6 @@
 
 'use strict';
 
-import type {HostComponent} from 'react-native';
-
 const React = require('react');
 
 const {
@@ -74,18 +72,10 @@ const styles = StyleSheet.create({
     margin: 3,
     fontSize: 12,
   },
-  focusedUncontrolled: {
-    margin: -2,
-    borderWidth: 2,
-    borderColor: '#0a0a0a',
-    flex: 1,
-    fontSize: 13,
-    padding: 4,
-  },
 });
 
 class WithLabel extends React.Component<$FlowFixMeProps> {
-  render(): React.Node {
+  render() {
     return (
       <View style={styles.labelContainer}>
         <View style={styles.label}>
@@ -102,7 +92,7 @@ class RewriteExample extends React.Component<$FlowFixMeProps, any> {
     super(props);
     this.state = {text: ''};
   }
-  render(): React.Node {
+  render() {
     const limit = 20;
     const remainder = limit - this.state.text.length;
     const remainderColor = remainder > 5 ? 'blue' : 'red';
@@ -136,7 +126,7 @@ class RewriteExampleInvalidCharacters extends React.Component<
     super(props);
     this.state = {text: ''};
   }
-  render(): React.Node {
+  render() {
     return (
       <View style={styles.rewriteContainer}>
         <TextInput
@@ -164,7 +154,7 @@ class RewriteInvalidCharactersAndClearExample extends React.Component<
     super(props);
     this.state = {text: ''};
   }
-  render(): React.Node {
+  render() {
     return (
       <View style={styles.rewriteContainer}>
         <TextInput
@@ -194,16 +184,14 @@ class RewriteInvalidCharactersAndClearExample extends React.Component<
   }
 }
 
-type ExampleRef = {current: null | {focus(): void, ...}};
-
 class BlurOnSubmitExample extends React.Component<{...}> {
-  ref1: ExampleRef = React.createRef();
-  ref2: ExampleRef = React.createRef();
-  ref3: ExampleRef = React.createRef();
-  ref4: ExampleRef = React.createRef();
-  ref5: ExampleRef = React.createRef();
+  ref1 = React.createRef();
+  ref2 = React.createRef();
+  ref3 = React.createRef();
+  ref4 = React.createRef();
+  ref5 = React.createRef();
 
-  render(): React.Node {
+  render() {
     return (
       <View>
         <TextInput
@@ -252,99 +240,8 @@ class BlurOnSubmitExample extends React.Component<{...}> {
   }
 }
 
-class SubmitBehaviorExample extends React.Component<{...}> {
-  ref1: ExampleRef = React.createRef();
-  ref2: ExampleRef = React.createRef();
-  ref3: ExampleRef = React.createRef();
-  ref4: ExampleRef = React.createRef();
-  ref5: ExampleRef = React.createRef();
-  ref6: ExampleRef = React.createRef();
-  ref7: ExampleRef = React.createRef();
-  ref8: ExampleRef = React.createRef();
-  ref9: ExampleRef = React.createRef();
-  ref10: ExampleRef = React.createRef();
-  ref11: ExampleRef = React.createRef();
-
-  render(): React.Node {
-    return (
-      <View>
-        <TextInput
-          ref={this.ref1}
-          placeholder="single line submit"
-          submitBehavior="submit"
-          onSubmitEditing={() => this.ref2.current?.focus()}
-        />
-        <TextInput
-          ref={this.ref2}
-          placeholder="single line blurAndSubmit"
-          submitBehavior="blurAndSubmit"
-          onSubmitEditing={() => this.ref3.current?.focus()}
-        />
-        <TextInput
-          ref={this.ref3}
-          placeholder="single line default"
-          onSubmitEditing={() => this.ref4.current?.focus()}
-        />
-        <TextInput
-          ref={this.ref4}
-          blurOnSubmit
-          placeholder="single line blurOnSubmit true"
-          onSubmitEditing={() => this.ref5.current?.focus()}
-        />
-        <TextInput
-          ref={this.ref5}
-          blurOnSubmit={false}
-          placeholder="single line blurOnSubmit false"
-          onSubmitEditing={() => this.ref6.current?.focus()}
-        />
-        <TextInput
-          ref={this.ref6}
-          multiline
-          placeholder="multiline submit"
-          submitBehavior="submit"
-          onSubmitEditing={() => this.ref7.current?.focus()}
-        />
-        <TextInput
-          ref={this.ref7}
-          multiline
-          placeholder="multiline blurAndSubmit"
-          submitBehavior="blurAndSubmit"
-          onSubmitEditing={() => this.ref8.current?.focus()}
-        />
-        <TextInput
-          ref={this.ref8}
-          multiline
-          blurOnSubmit
-          placeholder="multiline blurOnSubmit true"
-          onSubmitEditing={() => this.ref9.current?.focus()}
-        />
-        <TextInput
-          ref={this.ref9}
-          multiline
-          blurOnSubmit={false}
-          placeholder="multiline blurOnSubmit false"
-        />
-        <TextInput
-          ref={this.ref10}
-          multiline
-          placeholder="multiline newline"
-          submitBehavior="newline"
-        />
-        <TextInput ref={this.ref11} multiline placeholder="multiline default" />
-      </View>
-    );
-  }
-}
-
 class TextEventsExample extends React.Component<{...}, $FlowFixMeState> {
-  state:
-    | any
-    | {
-        curText: string,
-        prev2Text: string,
-        prev3Text: string,
-        prevText: string,
-      } = {
+  state = {
     curText: '<No Event>',
     prevText: '<No Event>',
     prev2Text: '<No Event>',
@@ -362,7 +259,7 @@ class TextEventsExample extends React.Component<{...}, $FlowFixMeState> {
     });
   };
 
-  render(): React.Node {
+  render() {
     return (
       <View>
         <TextInput
@@ -412,7 +309,7 @@ class TokenizedTextExample extends React.Component<
     super(props);
     this.state = {text: 'Hello #World'};
   }
-  render(): React.Node {
+  render() {
     //define delimiter
     let delimiter = /\s+/;
 
@@ -498,7 +395,7 @@ class SelectionExample extends React.Component<
     this.setState({selection});
   }
 
-  getRandomPosition(): number {
+  getRandomPosition() {
     const length = this.state.value.length;
     return Math.round(Math.random() * length);
   }
@@ -527,7 +424,7 @@ class SelectionExample extends React.Component<
     this.placeAt(this.getRandomPosition());
   }
 
-  render(): React.Node {
+  render() {
     const length = this.state.value.length;
 
     return (
@@ -578,20 +475,6 @@ class SelectionExample extends React.Component<
       </View>
     );
   }
-}
-
-function UncontrolledExample() {
-  const [isFocused, setIsFocused] = React.useState(false);
-
-  return (
-    <TextInput
-      defaultValue="Hello World!"
-      testID="uncontrolled-textinput"
-      style={isFocused ? styles.focusedUncontrolled : styles.default}
-      onFocus={() => setIsFocused(true)}
-      onBlur={() => setIsFocused(false)}
-    />
-  );
 }
 
 module.exports = ([
@@ -710,62 +593,9 @@ module.exports = ([
     },
   },
   {
-    title: 'Input modes',
-    name: 'inputModes',
-    render: function (): React.Node {
-      const inputMode = [
-        'none',
-        'text',
-        'decimal',
-        'numeric',
-        'tel',
-        'search',
-        'email',
-        'url',
-      ];
-      const examples = inputMode.map(mode => {
-        return (
-          <WithLabel key={mode} label={mode}>
-            <TextInput inputMode={mode} style={styles.default} />
-          </WithLabel>
-        );
-      });
-      return <View>{examples}</View>;
-    },
-  },
-  {
     title: 'Blur on submit',
     render: function (): React.Element<any> {
       return <BlurOnSubmitExample />;
-    },
-  },
-  {
-    title: 'enterKeyHint modes',
-    name: 'enterKeyHintTypes',
-    render: function (): React.Node {
-      const enterKeyHintTypesHints = [
-        'enter',
-        'done',
-        'go',
-        'next',
-        'previous',
-        'search',
-        'send',
-      ];
-      const examples = enterKeyHintTypesHints.map(hint => {
-        return (
-          <WithLabel key={hint} label={hint}>
-            <TextInput enterKeyHint={hint} style={styles.default} />
-          </WithLabel>
-        );
-      });
-      return <View>{examples}</View>;
-    },
-  },
-  {
-    title: 'Submit behavior',
-    render: function (): React.Element<any> {
-      return <SubmitBehaviorExample />;
     },
   },
   {
@@ -864,13 +694,6 @@ module.exports = ([
           />
         </View>
       );
-    },
-  },
-  {
-    title: 'Uncontrolled component with layout changes',
-    name: 'uncontrolledComponent',
-    render: function (): React.Node {
-      return <UncontrolledExample />;
     },
   },
 ]: Array<RNTesterModuleExample>);

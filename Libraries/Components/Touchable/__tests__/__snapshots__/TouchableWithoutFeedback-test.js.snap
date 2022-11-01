@@ -2,15 +2,6 @@
 
 exports[`TouchableWithoutFeedback renders correctly 1`] = `
 <Text
-  accessibilityState={
-    Object {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": undefined,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
   accessible={true}
   focusable={false}
   onClick={[Function]}
@@ -29,11 +20,7 @@ exports[`TouchableWithoutFeedback with disabled state should be disabled when di
 <View
   accessibilityState={
     Object {
-      "busy": undefined,
-      "checked": undefined,
       "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
     }
   }
   accessible={true}
@@ -52,11 +39,7 @@ exports[`TouchableWithoutFeedback with disabled state should be disabled when di
 <View
   accessibilityState={
     Object {
-      "busy": undefined,
-      "checked": undefined,
       "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
     }
   }
   accessible={true}
@@ -75,11 +58,7 @@ exports[`TouchableWithoutFeedback with disabled state should disable button when
 <View
   accessibilityState={
     Object {
-      "busy": undefined,
-      "checked": undefined,
       "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
     }
   }
   accessible={true}
@@ -98,11 +77,8 @@ exports[`TouchableWithoutFeedback with disabled state should keep accessibilityS
 <View
   accessibilityState={
     Object {
-      "busy": undefined,
       "checked": true,
       "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
     }
   }
   accessible={true}
@@ -121,11 +97,7 @@ exports[`TouchableWithoutFeedback with disabled state should overwrite accessibi
 <View
   accessibilityState={
     Object {
-      "busy": undefined,
-      "checked": undefined,
       "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
     }
   }
   accessible={true}

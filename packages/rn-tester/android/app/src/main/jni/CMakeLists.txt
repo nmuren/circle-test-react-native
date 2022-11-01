@@ -5,8 +5,8 @@
 
 cmake_minimum_required(VERSION 3.13)
 
-# Define the application dynamic library name here.
-project(appmodules)
+# Define the library name here.
+project(rntester_appmodules)
 
 include(${REACT_ANDROID_DIR}/cmake-utils/ReactNative-application.cmake)
 

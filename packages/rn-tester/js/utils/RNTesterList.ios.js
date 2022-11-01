@@ -232,11 +232,6 @@ const APIs: Array<RNTesterModuleInfo> = [
     supportsTVOS: true,
   },
   {
-    key: 'Keyboard',
-    module: require('../examples/Keyboard/KeyboardExample').default,
-    supportsTVOS: true,
-  },
-  {
     key: 'LayoutAnimationExample',
     module: require('../examples/Layout/LayoutAnimationExample'),
     supportsTVOS: true,

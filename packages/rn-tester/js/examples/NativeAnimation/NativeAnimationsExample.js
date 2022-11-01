@@ -14,9 +14,6 @@ import type AnimatedValue from 'react-native/Libraries/Animated/nodes/AnimatedVa
 
 const React = require('react');
 
-import RNTesterSettingSwitchRow from '../../components/RNTesterSettingSwitchRow';
-import useJsStalls from '../../utils/useJsStalls';
-
 const {
   View,
   Text,
@@ -29,7 +26,7 @@ const {
 const AnimatedSlider = Animated.createAnimatedComponent(Slider);
 
 class Tester extends React.Component<$FlowFixMeProps, $FlowFixMeState> {
-  state: any | {js: AnimatedValue, native: AnimatedValue} = {
+  state = {
     native: new Animated.Value(0),
     js: new Animated.Value(0),
   };
@@ -57,7 +54,7 @@ class Tester extends React.Component<$FlowFixMeProps, $FlowFixMeState> {
     }).start();
   };
 
-  render(): React.Node {
+  render() {
     return (
       <TouchableWithoutFeedback onPress={this.onPress}>
         <View>
@@ -78,7 +75,7 @@ class Tester extends React.Component<$FlowFixMeProps, $FlowFixMeState> {
 }
 
 class ValueListenerExample extends React.Component<{...}, $FlowFixMeState> {
-  state: any | {anim: AnimatedValue, progress: number} = {
+  state = {
     anim: new Animated.Value(0),
     progress: 0,
   };
@@ -105,7 +102,7 @@ class ValueListenerExample extends React.Component<{...}, $FlowFixMeState> {
     }).start();
   };
 
-  render(): React.Node {
+  render() {
     return (
       <TouchableWithoutFeedback onPress={this._onPress}>
         <View>
@@ -127,7 +124,7 @@ class ValueListenerExample extends React.Component<{...}, $FlowFixMeState> {
 }
 
 class LoopExample extends React.Component<{...}, $FlowFixMeState> {
-  state: any | {value: AnimatedValue} = {
+  state = {
     value: new Animated.Value(0),
   };
 
@@ -141,7 +138,7 @@ class LoopExample extends React.Component<{...}, $FlowFixMeState> {
     ).start();
   }
 
-  render(): React.Node {
+  render() {
     return (
       <View style={styles.row}>
         <Animated.View
@@ -160,49 +157,81 @@ class LoopExample extends React.Component<{...}, $FlowFixMeState> {
   }
 }
 
-const InternalSettings = () => {
-  const {
-    state,
-    onDisableForceJsStalls,
-    onEnableForceJsStalls,
-    onEnableJsStallsTracking,
-    onDisableJsStallsTracking,
-  } = useJsStalls();
-
-  const {stallIntervalId, filteredStall, busyTime, tracking} = state;
-
-  return (
-    <View>
-      <RNTesterSettingSwitchRow
-        active={stallIntervalId != null}
-        label="Force JS Stalls"
-        onEnable={onEnableForceJsStalls}
-        onDisable={onDisableForceJsStalls}
-      />
-
-      <RNTesterSettingSwitchRow
-        active={tracking}
-        label="Track JS Stalls"
-        onEnable={onEnableJsStallsTracking}
-        onDisable={onDisableJsStallsTracking}
-      />
-
-      {tracking && (
-        <Text>
-          {`JS Stall filtered: ${Math.round(filteredStall)}, `}
-          {`last: ${busyTime !== null ? busyTime.toFixed(8) : '<none>'}`}
-        </Text>
-      )}
-    </View>
-  );
-};
+const RNTesterSettingSwitchRow = require('../../components/RNTesterSettingSwitchRow');
+class InternalSettings extends React.Component<
+  {...},
+  {
+    busyTime: number | string,
+    filteredStall: number,
+    ...
+  },
+> {
+  _stallInterval: ?number;
+  render() {
+    return (
+      <View>
+        <RNTesterSettingSwitchRow
+          initialValue={false}
+          label="Force JS Stalls"
+          onEnable={() => {
+            /* $FlowFixMe[incompatible-type] (>=0.63.0 site=react_native_fb)
+             * This comment suppresses an error found when Flow v0.63 was
+             * deployed. To see the error delete this comment and run Flow. */
+            this._stallInterval = setInterval(() => {
+              const start = Date.now();
+              console.warn('burn CPU');
+              while (Date.now() - start < 100) {}
+            }, 300);
+          }}
+          onDisable={() => {
+            /* $FlowFixMe[incompatible-call] (>=0.63.0 site=react_native_fb)
+             * This comment suppresses an error found when Flow v0.63 was
+             * deployed. To see the error delete this comment and run Flow. */
+            clearInterval(this._stallInterval || 0);
+          }}
+        />
+        <RNTesterSettingSwitchRow
+          initialValue={false}
+          label="Track JS Stalls"
+          onEnable={() => {
+            require('react-native/Libraries/Interaction/JSEventLoopWatchdog').install(
+              {
+                thresholdMS: 25,
+              },
+            );
+            this.setState({busyTime: '<none>'});
+            require('react-native/Libraries/Interaction/JSEventLoopWatchdog').addHandler(
+              {
+                onStall: ({busyTime}) =>
+                  this.setState(state => ({
+                    busyTime,
+                    filteredStall:
+                      (state.filteredStall || 0) * 0.97 + busyTime * 0.03,
+                  })),
+              },
+            );
+          }}
+          onDisable={() => {
+            console.warn('Cannot disable yet....');
+          }}
+        />
+        {this.state && (
+          <Text>
+            {`JS Stall filtered: ${Math.round(this.state.filteredStall)}, `}
+            {`last: ${this.state.busyTime}`}
+          </Text>
+        )}
+      </View>
+    );
+  }
+}
 
 class EventExample extends React.Component<{...}, $FlowFixMeState> {
-  state: any | {anim: AnimatedValue} = {
+  state = {
     anim: new Animated.Value(0),
   };
 
-  render(): React.Node {
+  render() {
     return (
       <View>
         <Animated.View
@@ -253,14 +282,7 @@ class TrackingExample extends React.Component<
   $FlowFixMeProps,
   $FlowFixMeState,
 > {
-  state:
-    | any
-    | {
-        js: AnimatedValue,
-        native: AnimatedValue,
-        toJS: AnimatedValue,
-        toNative: AnimatedValue,
-      } = {
+  state = {
     native: new Animated.Value(0),
     toNative: new Animated.Value(0),
     js: new Animated.Value(0),
@@ -293,10 +315,7 @@ class TrackingExample extends React.Component<
     this.state.toJS.setValue(nextValue);
   };
 
-  renderBlock = (
-    anim: any | AnimatedValue,
-    dest: any | AnimatedValue,
-  ): Array<React.Node> => [
+  renderBlock = (anim: any | AnimatedValue, dest: any | AnimatedValue) => [
     <Animated.View
       key="line"
       style={[styles.line, {transform: [{translateX: dest}]}]}
@@ -307,7 +326,7 @@ class TrackingExample extends React.Component<
     />,
   ];
 
-  render(): React.Node {
+  render() {
     return (
       <TouchableWithoutFeedback onPress={this.onPress}>
         <View>

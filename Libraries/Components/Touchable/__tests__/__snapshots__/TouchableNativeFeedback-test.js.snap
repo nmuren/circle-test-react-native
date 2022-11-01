@@ -1,24 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`TouchableWithoutFeedback renders correctly 1`] = `
+<Text
+  accessible={true}
+  focusable={false}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+>
+  Touchable
+</Text>
+`;
+
 exports[`<TouchableNativeFeedback /> should render as expected 1`] = `
 <View
-  accessibilityState={
-    Object {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": undefined,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    Object {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
   accessible={true}
   focusable={false}
   onClick={[Function]}
@@ -31,23 +30,11 @@ exports[`<TouchableNativeFeedback /> should render as expected 1`] = `
 />
 `;
 
-exports[`<TouchableNativeFeedback disabled={false} accessibilityState={{disabled:true}}> should overwrite accessibilityState with value of disabled prop 1`] = `
+exports[`<TouchableNativeFeedback disabled={true}> should be disabled when disabled is true 1`] = `
 <View
   accessibilityState={
     Object {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": false,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    Object {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
+      "disabled": true,
     }
   }
   accessible={true}
@@ -66,19 +53,7 @@ exports[`<TouchableNativeFeedback disabled={true} accessibilityState={{}}> shoul
 <View
   accessibilityState={
     Object {
-      "busy": undefined,
-      "checked": undefined,
       "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    Object {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
     }
   }
   accessible={true}
@@ -97,19 +72,8 @@ exports[`<TouchableNativeFeedback disabled={true} accessibilityState={{checked: 
 <View
   accessibilityState={
     Object {
-      "busy": undefined,
       "checked": true,
       "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    Object {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
     }
   }
   accessible={true}
@@ -128,19 +92,7 @@ exports[`<TouchableNativeFeedback disabled={true} accessibilityState={{disabled:
 <View
   accessibilityState={
     Object {
-      "busy": undefined,
-      "checked": undefined,
       "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    Object {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
     }
   }
   accessible={true}
@@ -155,23 +107,11 @@ exports[`<TouchableNativeFeedback disabled={true} accessibilityState={{disabled:
 />
 `;
 
-exports[`<TouchableNativeFeedback disabled={true}> should be disabled when disabled is true 1`] = `
+exports[`<TouchableNativeFeedback disabled={false} accessibilityState={{disabled:true}}> should overwrite accessibilityState with value of disabled prop 1`] = `
 <View
   accessibilityState={
     Object {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": true,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    Object {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
+      "disabled": false,
     }
   }
   accessible={true}
@@ -184,37 +124,4 @@ exports[`<TouchableNativeFeedback disabled={true}> should be disabled when disab
   onResponderTerminationRequest={[Function]}
   onStartShouldSetResponder={[Function]}
 />
-`;
-
-exports[`TouchableWithoutFeedback renders correctly 1`] = `
-<Text
-  accessibilityState={
-    Object {
-      "busy": undefined,
-      "checked": undefined,
-      "disabled": undefined,
-      "expanded": undefined,
-      "selected": undefined,
-    }
-  }
-  accessibilityValue={
-    Object {
-      "max": undefined,
-      "min": undefined,
-      "now": undefined,
-      "text": undefined,
-    }
-  }
-  accessible={true}
-  focusable={false}
-  onClick={[Function]}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
->
-  Touchable
-</Text>
 `;

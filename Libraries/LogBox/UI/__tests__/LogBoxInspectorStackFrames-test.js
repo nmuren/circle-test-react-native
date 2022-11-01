@@ -4,19 +4,19 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * @flow strict-local
  * @format
- * @oncall react_native
+ * @emails oncall+react_native
+ * @flow strict-local
  */
 
+const React = require('react');
 import LogBoxInspectorStackFrames, {
   getCollapseMessage,
 } from '../LogBoxInspectorStackFrames';
 
-const render = require('../../../../jest/renderer');
-const LogBoxLog = require('../../Data/LogBoxLog').default;
 const {} = require('../LogBoxInspectorStackFrames');
-const React = require('react');
+const LogBoxLog = require('../../Data/LogBoxLog').default;
+const render = require('../../../../jest/renderer');
 
 const createLogWithFrames = (collapsedOptions: Array<?boolean>) => {
   return new LogBoxLog({

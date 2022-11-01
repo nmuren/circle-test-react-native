@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @format
- * @oncall react_native
+ * @emails oncall+react_native
  */
 
 'use strict';
 
 const base64 = require('base64-js');
-const {TextDecoder, TextEncoder} = require('util');
+const {TextEncoder, TextDecoder} = require('util');
 
 describe('binaryToBase64', () => {
   const binaryToBase64 = require('../binaryToBase64');

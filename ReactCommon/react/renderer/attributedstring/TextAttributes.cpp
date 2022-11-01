@@ -15,7 +15,8 @@
 
 #include <react/renderer/debug/debugStringConvertibleUtils.h>
 
-namespace facebook::react {
+namespace facebook {
+namespace react {
 
 void TextAttributes::apply(TextAttributes textAttributes) {
   // Color
@@ -62,9 +63,6 @@ void TextAttributes::apply(TextAttributes textAttributes) {
   baseWritingDirection = textAttributes.baseWritingDirection.has_value()
       ? textAttributes.baseWritingDirection
       : baseWritingDirection;
-  lineBreakStrategy = textAttributes.lineBreakStrategy.has_value()
-      ? textAttributes.lineBreakStrategy
-      : lineBreakStrategy;
 
   // Decoration
   textDecorationColor = textAttributes.textDecorationColor
@@ -113,7 +111,6 @@ bool TextAttributes::operator==(const TextAttributes &rhs) const {
              allowFontScaling,
              alignment,
              baseWritingDirection,
-             lineBreakStrategy,
              textDecorationColor,
              textDecorationLineType,
              textDecorationStyle,
@@ -133,7 +130,6 @@ bool TextAttributes::operator==(const TextAttributes &rhs) const {
              rhs.allowFontScaling,
              rhs.alignment,
              rhs.baseWritingDirection,
-             rhs.lineBreakStrategy,
              rhs.textDecorationColor,
              rhs.textDecorationLineType,
              rhs.textDecorationStyle,
@@ -192,7 +188,6 @@ SharedDebugStringConvertibleList TextAttributes::getDebugProps() const {
       debugStringConvertibleItem("lineHeight", lineHeight),
       debugStringConvertibleItem("alignment", alignment),
       debugStringConvertibleItem("baseWritingDirection", baseWritingDirection),
-      debugStringConvertibleItem("lineBreakStrategyIOS", lineBreakStrategy),
 
       // Decoration
       debugStringConvertibleItem("textDecorationColor", textDecorationColor),
@@ -213,4 +208,5 @@ SharedDebugStringConvertibleList TextAttributes::getDebugProps() const {
 }
 #endif
 
-} // namespace facebook::react
+} // namespace react
+} // namespace facebook

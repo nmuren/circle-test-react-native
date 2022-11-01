@@ -142,7 +142,7 @@ class MultiColumnExample extends React.PureComponent<
       getItemLayout(data, index).length + 2 * (CARD_MARGIN + BORDER_WIDTH);
     return {length, offset: length * index, index};
   }
-  _renderItemComponent = ({item}: RenderItemProps<any | Item>): $FlowFixMe => {
+  _renderItemComponent = ({item}: RenderItemProps<any | Item>) => {
     return (
       <View style={styles.card}>
         <ItemComponent

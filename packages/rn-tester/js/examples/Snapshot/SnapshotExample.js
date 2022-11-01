@@ -15,11 +15,11 @@ const {Alert, Image, StyleSheet, Text, View} = require('react-native');
 const ScreenshotManager = require('../../../NativeModuleExample/NativeScreenshotManager');
 
 class ScreenshotExample extends React.Component<{...}, $FlowFixMeState> {
-  state: any | {uri: void} = {
+  state = {
     uri: undefined,
   };
 
-  render(): React.Node {
+  render() {
     return (
       <View style={style.container}>
         <Text onPress={this.takeScreenshot} style={style.button}>

@@ -6,15 +6,13 @@
  *
  * @flow
  * @format
- * @oncall react_native
+ * @emails oncall+react_native
  */
 
-import TextInput from '../../Components/TextInput/TextInput';
-import TouchableWithoutFeedback from '../../Components/Touchable/TouchableWithoutFeedback';
-import View from '../../Components/View/View';
-import Text from '../../Text/Text';
-import {byTestID, byTextMatching, enter, tap} from '../ReactNativeTestTools';
 import * as React from 'react';
+import {byTestID, byTextMatching, enter, tap} from '../ReactNativeTestTools';
+
+import {Text, TextInput, TouchableWithoutFeedback, View} from 'react-native';
 
 const ReactTestRenderer = require('react-test-renderer');
 

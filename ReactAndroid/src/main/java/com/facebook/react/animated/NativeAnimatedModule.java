@@ -25,6 +25,7 @@ import com.facebook.react.bridge.UIManager;
 import com.facebook.react.bridge.UIManagerListener;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.common.annotations.VisibleForTesting;
+import com.facebook.react.config.ReactFeatureFlags;
 import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.facebook.react.modules.core.ReactChoreographer;
@@ -153,21 +154,38 @@ public class NativeAnimatedModule extends NativeAnimatedModuleSpec
   private class ConcurrentOperationQueue {
     private final Queue<UIThreadOperation> mQueue = new ConcurrentLinkedQueue<>();
     @Nullable private UIThreadOperation mPeekedOperation = null;
+    private boolean mSynchronizedAccess = false;
 
     @AnyThread
     boolean isEmpty() {
       return mQueue.isEmpty() && mPeekedOperation == null;
     }
 
+    void setSynchronizedAccess(boolean isSynchronizedAccess) {
+      mSynchronizedAccess = isSynchronizedAccess;
+    }
+
     @AnyThread
     void add(UIThreadOperation operation) {
-      mQueue.add(operation);
+      if (mSynchronizedAccess) {
+        synchronized (this) {
+          mQueue.add(operation);
+        }
+      } else {
+        mQueue.add(operation);
+      }
     }
 
     @UiThread
     void executeBatch(long maxBatchNumber, NativeAnimatedNodesManager nodesManager) {
       List<UIThreadOperation> operations;
-      operations = drainQueueIntoList(maxBatchNumber);
+      if (mSynchronizedAccess) {
+        synchronized (this) {
+          operations = drainQueueIntoList(maxBatchNumber);
+        }
+      } else {
+        operations = drainQueueIntoList(maxBatchNumber);
+      }
       if (operations != null) {
         for (UIThreadOperation operation : operations) {
           operation.execute(nodesManager);
@@ -262,6 +280,10 @@ public class NativeAnimatedModule extends NativeAnimatedModuleSpec
             }
           }
         };
+
+    // If shipping this flag, make sure to migrate to non-concurrent queue for efficiency
+    mOperations.setSynchronizedAccess(ReactFeatureFlags.enableSynchronizationForAnimated);
+    mPreOperations.setSynchronizedAccess(ReactFeatureFlags.enableSynchronizationForAnimated);
   }
 
   @Override
@@ -849,7 +871,7 @@ public class NativeAnimatedModule extends NativeAnimatedModuleSpec
     if (ANIMATED_MODULE_DEBUG) {
       FLog.d(
           NAME,
-          "queue disconnectAnimatedNodeFromView: " + animatedNodeTag + " viewTag: " + viewTag);
+          "queue: disconnectAnimatedNodeFromView: " + animatedNodeTag + " viewTag: " + viewTag);
     }
 
     decrementInFlightAnimationsForViewTag(viewTag);
@@ -861,7 +883,7 @@ public class NativeAnimatedModule extends NativeAnimatedModuleSpec
             if (ANIMATED_MODULE_DEBUG) {
               FLog.d(
                   NAME,
-                  "execute disconnectAnimatedNodeFromView: "
+                  "execute: disconnectAnimatedNodeFromView: "
                       + animatedNodeTag
                       + " viewTag: "
                       + viewTag);
@@ -875,7 +897,8 @@ public class NativeAnimatedModule extends NativeAnimatedModuleSpec
   public void restoreDefaultValues(final double animatedNodeTagDouble) {
     final int animatedNodeTag = (int) animatedNodeTagDouble;
     if (ANIMATED_MODULE_DEBUG) {
-      FLog.d(NAME, "queue restoreDefaultValues: " + animatedNodeTag);
+      FLog.d(
+          NAME, "queue restoreDefaultValues: disconnectAnimatedNodeFromView: " + animatedNodeTag);
     }
 
     addPreOperation(
@@ -883,7 +906,10 @@ public class NativeAnimatedModule extends NativeAnimatedModuleSpec
           @Override
           public void execute(NativeAnimatedNodesManager animatedNodesManager) {
             if (ANIMATED_MODULE_DEBUG) {
-              FLog.d(NAME, "execute restoreDefaultValues: " + animatedNodeTag);
+              FLog.d(
+                  NAME,
+                  "execute restoreDefaultValues: disconnectAnimatedNodeFromView: "
+                      + animatedNodeTag);
             }
             animatedNodesManager.restoreDefaultValues(animatedNodeTag);
           }

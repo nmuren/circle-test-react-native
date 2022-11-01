@@ -5,15 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  *
  * @format
- * @oncall react_native
+ * @emails oncall+react_native
  */
 
 'use strict';
 
-const Text = require('../../../Text/Text');
-const TouchableOpacity = require('../TouchableOpacity');
 const React = require('react');
 const ReactTestRenderer = require('react-test-renderer');
+const Text = require('../../../Text/Text');
+const TouchableOpacity = require('../TouchableOpacity');
 
 describe('TouchableOpacity', () => {
   it('renders correctly', () => {

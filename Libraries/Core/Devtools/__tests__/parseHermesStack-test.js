@@ -6,7 +6,7 @@
  *
  * @flow strict-local
  * @format
- * @oncall react_native
+ * @emails oncall+react_native
  */
 
 'use strict';

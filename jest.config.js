@@ -16,14 +16,7 @@ module.exports = {
     '.*': './jest/private/preprocessor.js',
   },
   setupFiles: ['./jest/setup.js'],
-  fakeTimers: {
-    enableGlobally: true,
-    legacyFakeTimers: true,
-  },
-  snapshotFormat: {
-    escapeString: true,
-    printBasicPrototype: true,
-  },
+  timers: 'fake',
   testRegex: '/__tests__/.*-test\\.js$',
   testPathIgnorePatterns: [
     '/node_modules/',

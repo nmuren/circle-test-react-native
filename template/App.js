@@ -26,12 +26,9 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
-type SectionProps = {
-  title: string,
-  children: Node,
-};
-
-function Section({children, title}: SectionProps): Node {
+/* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
+ * LTI update could not be added via codemod */
+const Section = ({children, title}): Node => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.sectionContainer}>
@@ -55,9 +52,9 @@ function Section({children, title}: SectionProps): Node {
       </Text>
     </View>
   );
-}
+};
 
-function App(): Node {
+const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -96,7 +93,7 @@ function App(): Node {
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   sectionContainer: {

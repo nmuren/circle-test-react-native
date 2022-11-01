@@ -71,8 +71,7 @@ inline static UIFont *RCTEffectiveFontFromTextAttributes(const TextAttributes &t
   fontProperties.weight = textAttributes.fontWeight.has_value()
       ? RCTUIFontWeightFromInteger((NSInteger)textAttributes.fontWeight.value())
       : NAN;
-  fontProperties.sizeMultiplier =
-      textAttributes.allowFontScaling.value_or(true) ? textAttributes.fontSizeMultiplier : 1;
+  fontProperties.sizeMultiplier = textAttributes.fontSizeMultiplier;
 
   return RCTFontWithFontProperties(fontProperties);
 }
@@ -154,12 +153,6 @@ NSDictionary<NSAttributedStringKey, id> *RCTNSTextAttributesFromTextAttributes(T
   if (textAttributes.baseWritingDirection.has_value()) {
     paragraphStyle.baseWritingDirection =
         RCTNSWritingDirectionFromWritingDirection(textAttributes.baseWritingDirection.value());
-    isParagraphStyleUsed = YES;
-  }
-
-  if (textAttributes.lineBreakStrategy.has_value()) {
-    paragraphStyle.lineBreakStrategy =
-        RCTNSLineBreakStrategyFromLineBreakStrategy(textAttributes.lineBreakStrategy.value());
     isParagraphStyleUsed = YES;
   }
 
@@ -312,50 +305,6 @@ NSDictionary<NSAttributedStringKey, id> *RCTNSTextAttributesFromTextAttributes(T
   return [attributes copy];
 }
 
-static void RCTApplyBaselineOffset(NSMutableAttributedString *attributedText)
-{
-  __block CGFloat maximumLineHeight = 0;
-
-  [attributedText enumerateAttribute:NSParagraphStyleAttributeName
-                             inRange:NSMakeRange(0, attributedText.length)
-                             options:NSAttributedStringEnumerationLongestEffectiveRangeNotRequired
-                          usingBlock:^(NSParagraphStyle *paragraphStyle, __unused NSRange range, __unused BOOL *stop) {
-                            if (!paragraphStyle) {
-                              return;
-                            }
-
-                            maximumLineHeight = MAX(paragraphStyle.maximumLineHeight, maximumLineHeight);
-                          }];
-
-  if (maximumLineHeight == 0) {
-    // `lineHeight` was not specified, nothing to do.
-    return;
-  }
-
-  __block CGFloat maximumFontLineHeight = 0;
-
-  [attributedText enumerateAttribute:NSFontAttributeName
-                             inRange:NSMakeRange(0, attributedText.length)
-                             options:NSAttributedStringEnumerationLongestEffectiveRangeNotRequired
-                          usingBlock:^(UIFont *font, NSRange range, __unused BOOL *stop) {
-                            if (!font) {
-                              return;
-                            }
-
-                            maximumFontLineHeight = MAX(font.lineHeight, maximumFontLineHeight);
-                          }];
-
-  if (maximumLineHeight < maximumFontLineHeight) {
-    return;
-  }
-
-  CGFloat baseLineOffset = (maximumLineHeight - maximumFontLineHeight) / 2.0;
-
-  [attributedText addAttribute:NSBaselineOffsetAttributeName
-                         value:@(baseLineOffset)
-                         range:NSMakeRange(0, attributedText.length)];
-}
-
 NSAttributedString *RCTNSAttributedStringFromAttributedString(const AttributedString &attributedString)
 {
   static UIImage *placeholderImage;
@@ -408,7 +357,7 @@ NSAttributedString *RCTNSAttributedStringFromAttributedString(const AttributedSt
 
     [nsAttributedString appendAttributedString:nsAttributedStringFragment];
   }
-  RCTApplyBaselineOffset(nsAttributedString);
+
   [nsAttributedString endEditing];
 
   return nsAttributedString;

@@ -4,8 +4,8 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
+ * @emails react_native
  * @format
- * @oncall react_native
  */
 
 'use strict';
@@ -13,7 +13,7 @@
 const path = require('path');
 const withBabelRegister = require('./with-babel-register');
 
-// We use the prepack hook before publishing package to set this value to true
+// We run yarn prepublish before publishing package which will set this value to true
 const PACKAGE_USAGE = false;
 const ERRORS = {
   misnamedHasteModule(hasteModuleName) {
@@ -35,7 +35,7 @@ function requireModuleParser() {
 
       withBabelRegister(config, () => {
         RNModuleParser = require('react-native-codegen/src/parsers/flow/modules');
-        RNParserUtils = require('react-native-codegen/src/parsers/utils');
+        RNParserUtils = require('react-native-codegen/src/parsers/flow/utils');
       });
     } else {
       const config = {
@@ -45,7 +45,7 @@ function requireModuleParser() {
 
       withBabelRegister(config, () => {
         RNModuleParser = require('react-native-codegen/lib/parsers/flow/modules');
-        RNParserUtils = require('react-native-codegen/lib/parsers/utils');
+        RNParserUtils = require('react-native-codegen/lib/parsers/flow/utils');
       });
     }
   }
@@ -134,7 +134,7 @@ function rule(context) {
       const [parsingErrors, tryParse] = createParserErrorCapturer();
 
       const sourceCode = context.getSourceCode().getText();
-      const ast = flowParser.parse(sourceCode, {enums: true});
+      const ast = flowParser.parse(sourceCode);
 
       tryParse(() => {
         buildModuleSchema(hasteModuleName, ast, tryParse);
